@@ -1,0 +1,2509 @@
+<!doctype html><html><head><script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("mbm:theme")==="dark"?"dark":"light")}catch(e){document.documentElement.setAttribute("data-theme","light")}</script><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#0a0a0a;color:#ece7e0}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta name="theme-color" content="#f5f2ed">
+<title>Manufacturing Business Manager</title>
+
+<style>
+/* Theme: black and orange, always dark. Orange (#f3881e) is the only brand colour; hazard-stripe accent nods to the workshop floor. */
+:root {
+  color-scheme: dark;
+  --bg: #0a0a0a;
+  --surface: #151515;
+  --surface-2: #1f1f1f;
+  --ink: #fff3e6;
+  --text: #ece7e0;
+  --muted: #a39a8f;
+  --line: #2a2a2a;
+  --line-strong: #3d3d3d;
+  --primary: #f3881e;
+  --on-primary: #150b00;
+  --primary-hover: #f9a24d;
+  --focus: #f9ae5c;
+  --good: #5fd38d;
+  --good-bg: #0f2a1a;
+  --warn: #ffb347;
+  --warn-bg: #2d1b06;
+  --bad: #ff7468;
+  --bad-bg: #351311;
+  --info: #ffb067;
+  --info-bg: #2a1a0b;
+  --neutral-bg: #262626;
+  --scrim: rgba(0, 0, 0, 0.78);
+  --f-display: 'Barlow Condensed', 'sans-serif-condensed', 'Roboto Condensed', 'Arial Narrow', system-ui, sans-serif;
+  --f-body: 'IBM Plex Sans', Roboto, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --f-mono: 'IBM Plex Mono', 'Roboto Mono', ui-monospace, Menlo, Consolas, monospace;
+}
+html { background: #0a0a0a; }
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.45;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+h1, h2, h3, p { margin: 0; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.boot { padding: 48px 16px; text-align: center; color: var(--muted); }
+
+/* navigation bar */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--surface); border-bottom: 1px solid var(--line); }
+.bar-in { max-width: 1040px; margin: 0 auto; padding: 8px 16px; display: flex; align-items: center; gap: 8px; }
+.bar-in .spacer { flex: 1; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 56px; display: flex; flex-direction: column; gap: 20px; }
+.page-title { font-family: var(--f-display); font-weight: 700; font-size: 34px; line-height: 1.05; color: var(--ink); letter-spacing: 0.005em; text-wrap: balance; }
+.page-sub { color: var(--muted); margin-top: 4px; }
+.masthead h1 { font-family: var(--f-display); font-weight: 700; font-size: clamp(34px, 7vw, 52px); line-height: 1; color: var(--ink); text-wrap: balance; }
+.masthead p { margin-top: 8px; color: var(--muted); }
+.masthead::after { content: ''; display: block; width: 72px; height: 4px; background: var(--ink); margin-top: 14px; }
+
+/* buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 10px 18px; border-radius: 4px; border: 1px solid var(--primary); background: var(--primary); color: var(--on-primary); font-weight: 600; cursor: pointer; text-align: center; line-height: 1.2; }
+.btn:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.btn-secondary { background: var(--surface); color: var(--ink); border-color: var(--line-strong); }
+.btn-secondary:hover { background: var(--surface-2); border-color: var(--ink); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: transparent; }
+.btn-ghost:hover { background: var(--surface-2); border-color: transparent; }
+.btn-danger { background: var(--surface); color: var(--bad); border-color: var(--bad); }
+.btn-danger:hover { background: var(--bad-bg); border-color: var(--bad); }
+.btn-danger-solid { background: var(--bad); border-color: var(--bad); color: #fff; }
+.btn-danger-solid:hover { background: var(--bad); filter: brightness(0.92); border-color: var(--bad); }
+.btn-sm { min-height: 44px; padding: 8px 12px; font-size: 15px; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* sections and cards */
+.sec-title { font-family: var(--f-display); font-weight: 600; font-size: 16px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding-bottom: 6px; border-bottom: 1px solid var(--line); margin-bottom: 12px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 16px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 12px; }
+.cards-count { grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.stat .k { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.stat .v { font-family: var(--f-display); font-weight: 700; font-size: 36px; line-height: 1.05; color: var(--ink); font-variant-numeric: tabular-nums; }
+.stat .v-money { font-family: var(--f-mono); font-weight: 500; font-size: 19px; line-height: 1.3; color: var(--ink); overflow-wrap: anywhere; }
+.stat .s { font-size: 13px; color: var(--muted); }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 12px; }
+.tile { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; text-align: left; padding: 16px; min-height: 84px; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--surface); color: var(--ink); cursor: pointer; }
+.tile:hover { border-color: var(--ink); background: var(--surface-2); }
+.tile strong { font-family: var(--f-display); font-weight: 700; font-size: 23px; line-height: 1.1; }
+.tile span { color: var(--muted); font-size: 14px; }
+.tile .tile-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.tile-primary { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.tile-primary span { color: inherit; opacity: 0.85; }
+.tile-primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
+
+/* alerts, badges, tags */
+.alert { border: 1px solid var(--warn); background: var(--warn-bg); color: var(--warn); border-radius: 6px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+.alert strong { font-family: var(--f-display); font-size: 21px; font-weight: 700; }
+.alert-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; color: var(--text); }
+.alert-row .btn { background: var(--surface); color: var(--ink); border-color: var(--line-strong); }
+.note { border: 1px solid var(--line-strong); border-radius: 6px; padding: 12px 14px; background: var(--surface); color: var(--text); font-size: 15px; }
+.note.warn { border-color: var(--warn); background: var(--warn-bg); color: var(--warn); }
+.note.info { border-color: var(--info); background: var(--info-bg); color: var(--info); }
+.mode-banner { border-left: 4px solid var(--ink); background: var(--surface-2); padding: 10px 14px; border-radius: 0 4px 4px 0; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; }
+.mode-banner b { font-family: var(--f-display); font-size: 20px; letter-spacing: 0.02em; color: var(--ink); }
+.badge { display: inline-block; padding: 2px 9px; border-radius: 3px; font-size: 13px; font-weight: 600; line-height: 1.5; background: var(--neutral-bg); color: var(--text); white-space: nowrap; }
+.b-good { background: var(--good-bg); color: var(--good); }
+.b-warn { background: var(--warn-bg); color: var(--warn); }
+.b-bad { background: var(--bad-bg); color: var(--bad); }
+.b-info { background: var(--info-bg); color: var(--info); }
+.tag { display: inline-block; padding: 1px 7px; border-radius: 3px; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.tag.bad { background: var(--bad-bg); color: var(--bad); }
+.tag.warn { background: var(--warn-bg); color: var(--warn); }
+.count-pill { display: inline-block; min-width: 24px; padding: 0 8px; border-radius: 12px; background: var(--warn-bg); color: var(--warn); font-size: 13px; font-weight: 700; text-align: center; }
+
+/* forms */
+.form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 14px; }
+.field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.field.wide { grid-column: 1 / -1; }
+.field > label, .field > .lbl { font-weight: 600; font-size: 14px; color: var(--ink); }
+.field .hint { font-size: 13px; color: var(--muted); }
+input[type="text"], input[type="password"], input[type="date"], input[type="number"], input[type="search"], select, textarea {
+  width: 100%; min-height: 48px; padding: 10px 12px; border: 1px solid var(--line-strong); border-radius: 4px; background: var(--surface); color: var(--text);
+}
+textarea { min-height: 88px; resize: vertical; }
+input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--primary); flex: none; }
+input[readonly] { background: var(--surface-2); }
+[aria-invalid="true"] { border-color: var(--bad) !important; box-shadow: inset 0 0 0 1px var(--bad); }
+.field-err { color: var(--bad); font-size: 13px; font-weight: 600; margin-top: 2px; }
+.check { display: flex; align-items: center; gap: 10px; min-height: 44px; }
+.fieldset { border: 1px solid var(--line); border-radius: 6px; background: var(--surface); padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+.fieldset > h2 { font-family: var(--f-display); font-weight: 700; font-size: 22px; color: var(--ink); }
+
+/* cost table */
+.cost-scroll { max-height: min(64vh, 680px); overflow: auto; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--surface); -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+.cost-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+.cost-table th { position: sticky; top: 0; z-index: 2; background: var(--surface-2); text-align: left; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 10px 12px; border-bottom: 1px solid var(--line-strong); }
+.cost-table th:last-child, .cost-table td:last-child { text-align: right; }
+.cost-table td { padding: 4px 8px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.cost-table td.p { padding-left: 12px; }
+.cost-table td.p .n { display: inline-block; width: 26px; color: var(--muted); font-family: var(--f-mono); font-size: 13px; }
+.cost-table td.a { width: 46%; min-width: 150px; }
+.cost-table td.a input { text-align: right; font-family: var(--f-mono); font-variant-numeric: tabular-nums; min-height: 44px; }
+.cost-table tfoot td { position: sticky; bottom: 0; background: var(--surface-2); border-top: 2px solid var(--ink); border-bottom: none; font-weight: 700; padding: 10px 12px; color: var(--ink); }
+.cost-table.readonly td.a { font-family: var(--f-mono); font-variant-numeric: tabular-nums; padding: 8px 12px; width: auto; }
+.cost-table.readonly td.p { padding: 8px 12px; }
+.totals { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 14px; align-items: start; }
+.total-box { border: 2px solid var(--ink); border-radius: 6px; padding: 14px 16px; background: var(--surface); }
+.total-box .k { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.total-box .v { font-family: var(--f-mono); font-variant-numeric: tabular-nums; font-weight: 500; font-size: clamp(26px, 6vw, 36px); color: var(--ink); overflow-wrap: anywhere; }
+.pos { color: var(--good); }
+.neg { color: var(--bad); }
+
+/* lists */
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.toolbar .grow { flex: 1 1 260px; min-width: 0; }
+.toolbar select { width: auto; min-width: 190px; flex: 0 1 auto; }
+.chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+.chip { flex: none; min-height: 44px; padding: 8px 14px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); border-radius: 22px; cursor: pointer; font-weight: 500; white-space: nowrap; }
+.chip[aria-pressed="true"] { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 440px), 1fr)); gap: 12px; }
+.list > .empty { grid-column: 1 / -1; }
+.item { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.item-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.item-title { font-weight: 700; font-size: 18px; color: var(--ink); overflow-wrap: anywhere; }
+.item-sub { color: var(--muted); font-size: 14px; overflow-wrap: anywhere; }
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 14px; margin: 0; }
+.facts dt { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 0; overflow-wrap: anywhere; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 10px; border-top: 1px solid var(--line); }
+.empty { border: 1px dashed var(--line-strong); border-radius: 6px; padding: 28px 16px; text-align: center; color: var(--muted); display: flex; flex-direction: column; gap: 12px; align-items: center; background: var(--surface); }
+.empty strong { font-family: var(--f-display); font-size: 22px; color: var(--ink); }
+.detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 14px 20px; margin: 0; }
+.detail-grid dt { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.detail-grid dd { margin: 2px 0 0; overflow-wrap: anywhere; }
+.detail-grid .wide { grid-column: 1 / -1; }
+.table-wrap { overflow-x: auto; }
+.plain-table { width: 100%; border-collapse: collapse; }
+.plain-table th, .plain-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); font-size: 15px; }
+.plain-table th { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.stages { display: grid; gap: 8px; }
+.stage { display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 10px 14px; border: 1px solid var(--line-strong); border-radius: 4px; background: var(--surface); cursor: pointer; }
+.stage:has(input:checked) { border-color: var(--primary); background: var(--info-bg); box-shadow: inset 0 0 0 1px var(--primary); }
+.stage input { width: 20px; height: 20px; accent-color: var(--primary); flex: none; }
+.stage .n { font-family: var(--f-mono); color: var(--muted); width: 22px; flex: none; }
+.stage .cur { margin-left: auto; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+
+/* toasts and dialog */
+#toasts { position: fixed; left: 0; right: 0; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; align-items: center; gap: 8px; padding-inline: 16px; z-index: 60; pointer-events: none; }
+.toast { pointer-events: auto; max-width: 560px; width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border-radius: 6px; background: var(--ink); color: var(--bg); box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28); font-weight: 500; }
+.toast.err { background: var(--bad); color: #fff; }
+.toast .btn { min-height: 36px; padding: 4px 12px; background: transparent; color: inherit; border-color: currentColor; }
+.modal-back { position: fixed; inset: 0; z-index: 70; background: var(--scrim); display: grid; place-items: center; padding: 16px; }
+.modal { background: var(--surface); color: var(--text); width: 100%; max-width: 480px; max-height: calc(100% - 32px); overflow: auto; border-radius: 8px; padding: 20px; box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35); display: flex; flex-direction: column; gap: 14px; }
+.modal h2 { font-family: var(--f-display); font-size: 26px; font-weight: 700; color: var(--ink); }
+.modal textarea { min-height: 220px; font-family: var(--f-mono); font-size: 13px; }
+.modal .btn-row { justify-content: flex-end; }
+
+@media (max-width: 520px) {
+  .page-title { font-size: 30px; }
+  .facts { grid-template-columns: 1fr 1fr; }
+  .toolbar select { width: 100%; }
+  .btn-row > .btn.grow-sm { flex: 1 1 100%; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn, .tile, .chip { transition: background-color 0.12s ease, border-color 0.12s ease; }
+}
+
+
+/* ===== black + orange look ===== */
+body { background: radial-gradient(720px 340px at 90% -60px, rgba(243, 136, 30, 0.20), transparent 65%), #0a0a0a; background-repeat: no-repeat; }
+::placeholder { color: #6d665e; opacity: 1; }
+::selection { background: #f3881e; color: #150b00; }
+
+/* top bar */
+.bar { background: rgba(10, 10, 10, 0.94); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid #262626; }
+.bar::after { content: ''; display: block; height: 3px; background: linear-gradient(90deg, #f3881e, #f9ae5c 45%, rgba(243, 136, 30, 0) 100%); }
+
+/* headings */
+.page-title, .masthead h1 { color: #fff; letter-spacing: 0.01em; }
+.masthead { padding-top: 6px; }
+.masthead p { color: var(--muted); }
+.masthead::after { width: 110px; height: 9px; border-radius: 2px; margin-top: 16px; background: repeating-linear-gradient(-45deg, #f3881e 0 9px, #0a0a0a 9px 18px); }
+.sec-title { color: #f6a04a; border-bottom: 1px solid #2c2c2c; display: flex; align-items: center; gap: 10px; }
+.sec-title::before { content: ''; width: 4px; height: 16px; border-radius: 2px; background: #f3881e; flex: none; }
+
+/* buttons */
+.btn { border-radius: 10px; font-weight: 700; letter-spacing: 0.01em; background: linear-gradient(180deg, #f79a3a, #e07410); border-color: #f3881e; color: #150b00; box-shadow: 0 4px 16px rgba(224, 116, 16, 0.28); }
+.btn:hover { background: linear-gradient(180deg, #f9a44a, #f3881e); border-color: #f9a24d; }
+.btn:active { transform: scale(0.98); }
+.btn-secondary { background: #1b1b1b; color: #f3ede5; border-color: #3d3d3d; box-shadow: none; }
+.btn-secondary:hover { background: #242424; border-color: #f3881e; color: #ffb067; }
+.btn-ghost { background: transparent; color: #ffb067; border-color: transparent; box-shadow: none; }
+.btn-ghost:hover { background: rgba(243, 136, 30, 0.12); border-color: transparent; }
+.btn-danger { background: #1b1b1b; color: var(--bad); border-color: #6b2a25; box-shadow: none; }
+.btn-danger:hover { background: var(--bad-bg); border-color: var(--bad); }
+.btn-danger-solid { background: #d6322a; border-color: #d6322a; color: #fff; box-shadow: none; }
+
+/* surfaces */
+.card, .stat, .item, .fieldset, .empty, .tile, .note { background: linear-gradient(180deg, #1a1a1a, #141414); border-color: #2b2b2b; border-radius: 12px; }
+.empty { border-style: dashed; border-color: #4a3a2a; }
+.stat { border-left: 3px solid #f3881e; }
+.stat .k { color: #b8aea2; }
+.stat .v { color: #f5891e; }
+.stat .v-money { color: #ffc48a; }
+.stat .s { color: var(--muted); }
+.item:hover { border-color: #4a3a2a; }
+.item-title { color: #fff; }
+
+/* dashboard tiles */
+.tile { border-color: #333; }
+.tile:hover { border-color: #f3881e; background: linear-gradient(180deg, #211a13, #17130f); }
+.tile strong { color: #fff; }
+.tile-primary { background: linear-gradient(135deg, #f79a3a 0%, #e07410 60%, #e85a00 100%); border-color: #f79a3a; color: #150b00; box-shadow: 0 8px 24px rgba(224, 116, 16, 0.30); }
+.tile-primary strong { color: #150b00; }
+.tile-primary span { color: #3a1c00; opacity: 1; }
+.tile-primary:hover { background: linear-gradient(135deg, #f9a44a 0%, #f3881e 60%, #f06400 100%); border-color: #f9a44a; }
+
+/* reminders and notes */
+.alert { border: 1px solid #f3881e; border-left-width: 5px; background: linear-gradient(90deg, rgba(243, 136, 30, 0.20), rgba(243, 136, 30, 0.05)); color: #ffc58a; border-radius: 12px; }
+.alert strong { color: #ffd9b0; }
+.alert-row .btn { background: #1b1b1b; color: #ffb067; border-color: #f3881e; box-shadow: none; }
+.note.info { background: rgba(243, 136, 30, 0.08); border-color: #5a3a1a; color: #ffc58a; }
+.mode-banner { border-left-color: #f3881e; background: #1a1a1a; }
+.mode-banner b { color: #fff; }
+.count-pill { background: #f3881e; color: #150b00; }
+.badge { border-radius: 6px; }
+.tag.warn, .b-warn { background: #3a2308; color: #ffb347; }
+
+/* forms */
+.field > label, .field > .lbl { color: #f3ede5; }
+input[type="text"], input[type="date"], input[type="number"], input[type="search"], select, textarea { background: #0f0f0f; border: 1px solid #3a3a3a; border-radius: 10px; color: #fff; }
+input[type="text"]:focus, input[type="date"]:focus, input[type="number"]:focus, input[type="search"]:focus, select:focus, textarea:focus { outline: none; border-color: #f3881e; box-shadow: 0 0 0 3px rgba(243, 136, 30, 0.25); }
+input[readonly] { background: #1a1a1a; color: #cfc6bb; }
+input[type="checkbox"], .stage input { accent-color: #f3881e; }
+:focus-visible { outline: 3px solid #f9ae5c; outline-offset: 2px; }
+
+/* chips, stages */
+.chip { background: #1b1b1b; border-color: #3d3d3d; color: #f3ede5; }
+.chip[aria-pressed="true"] { background: #f3881e; border-color: #f3881e; color: #150b00; font-weight: 700; }
+.stage { background: #151515; border-color: #333; border-radius: 10px; }
+.stage:has(input:checked) { border-color: #f3881e; background: rgba(243, 136, 30, 0.12); box-shadow: inset 0 0 0 1px #f3881e; }
+
+/* tables and totals */
+.cost-scroll { border-color: #333; border-radius: 12px; background: #131313; }
+.cost-table th, .plain-table th { background: #1f1f1f; color: #f6a04a; }
+.cost-table tfoot td { background: #1f1f1f; border-top: 2px solid #f3881e; color: #fff; }
+.cost-table td { border-bottom-color: #262626; }
+.total-box { border: 2px solid #f3881e; border-radius: 12px; background: linear-gradient(180deg, #1c150e, #131313); box-shadow: 0 0 0 4px rgba(243, 136, 30, 0.08); }
+.total-box .v { color: #f9ae5c; }
+.plain-table th, .plain-table td { border-bottom-color: #262626; }
+.facts dt, .detail-grid dt { color: #b8aea2; }
+.actions { border-top-color: #2a2a2a; }
+
+/* toasts and dialogs */
+.toast { background: #1f1f1f; color: #fff3e6; border: 1px solid #f3881e; box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6); }
+.toast.err { background: #3a1210; border-color: #ff7468; color: #ffd6d1; }
+.modal { background: #171717; border: 1px solid #3a2a1a; border-radius: 16px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(243, 136, 30, 0.15); }
+.modal h2 { color: #fff; }
+
+/* phone sync */
+.sync-status { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border-radius: 12px; border: 1px solid #3a3a3a; background: #101010; }
+.sync-status b { font-family: var(--f-display); font-size: 20px; color: #fff; }
+.sync-status span { color: var(--text); }
+.sync-status small { color: var(--muted); }
+.sync-status.ok { border-color: #2f7a4d; background: #0f2418; }
+.sync-status.ok b { color: #5fd38d; }
+.sync-status.bad { border-color: #8a3a33; background: #2a1210; }
+.sync-status.bad b { color: #ff7468; }
+.sync-status.wait { border-color: #6b4a1f; background: #241607; }
+.sync-status.wait b { color: #ffb347; }
+.sync-code { font-size: 28px; letter-spacing: 0.12em; color: #f9ae5c; background: #0f0f0f; border: 1px dashed #f3881e; border-radius: 10px; padding: 10px 14px; text-align: center; }
+.sync-chip { display: inline-block; margin-top: 12px; padding: 4px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; border: 1px solid #3a3a3a; background: #151515; color: var(--text); }
+.sync-chip.ok { border-color: #2f7a4d; color: #5fd38d; }
+.sync-chip.bad { border-color: #8a3a33; color: #ff7468; }
+.sync-chip.wait { border-color: #6b4a1f; color: #ffb347; }
+/* brand logo + footer */
+.brand-logo { height: 24px; width: auto; display: block; }
+.bar-in .brand-logo { margin-left: 4px; }
+.top-logo { display: flex; justify-content: flex-end; }
+.top-logo .brand-logo { height: 30px; }
+.app-footer { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; text-align: center; font-size: 11px; line-height: 1.2; color: var(--muted); background: var(--bg); border-top: 1px solid var(--line); padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px)); pointer-events: none; }
+body { padding-bottom: 34px; }
+#toasts { bottom: calc(44px + env(safe-area-inset-bottom, 0px)) !important; }
+/* calendar picker */
+.date-input { cursor: pointer; padding-right: 44px !important; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='%23f3881e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cpath d='M16 2v4M8 2v4M3 10h18'/%3E%3C/svg%3E") !important; background-repeat: no-repeat !important; background-position: right 12px center !important; }
+.cal { display: flex; flex-direction: column; gap: 10px; }
+.cal-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.cal-head strong { font-size: 17px; color: #fff; }
+.cal-nav { min-width: 44px; min-height: 44px; border-radius: 10px; border: 1px solid var(--line-strong); background: var(--surface-2); color: var(--primary); font-size: 22px; line-height: 1; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; }
+.cal-dow { font-size: 12px; color: var(--muted); padding: 4px 0; text-transform: uppercase; }
+.cal-day { min-height: 40px; border-radius: 10px; border: 1px solid transparent; background: transparent; color: var(--text); font-size: 15px; }
+.cal-day:hover { background: var(--surface-2); }
+.cal-day.today { border-color: var(--primary); }
+.cal-day.sel { background: var(--primary); color: var(--on-primary); font-weight: 700; }
+.cal-blank { min-height: 40px; }
+/* ===== Spatial UI: floating glass panels, depth and light (palette taken from the Spark Tech logo: orange #F3881E, white, black) ===== */
+:root { --logo-orange: #f3881e; --glass: rgba(255, 255, 255, 0.07); --glass-strong: rgba(255, 255, 255, 0.11); --glass-edge: rgba(255, 255, 255, 0.16); --depth: 0 24px 48px -16px rgba(0, 0, 0, 0.75), 0 4px 14px rgba(0, 0, 0, 0.45); --hi: inset 0 1px 0 rgba(255, 255, 255, 0.20), inset 0 -1px 0 rgba(0, 0, 0, 0.35); }
+html { background: #07070a; }
+body { background: radial-gradient(900px 520px at 100% -10%, rgba(243, 136, 30, 0.34), transparent 62%), radial-gradient(760px 520px at -15% 38%, rgba(243, 136, 30, 0.14), transparent 60%), radial-gradient(620px 460px at 70% 108%, rgba(255, 255, 255, 0.07), transparent 65%), linear-gradient(180deg, #0d0d11, #07070a); background-attachment: fixed; background-repeat: no-repeat; }
+#app { perspective: 1100px; }
+
+/* floating glass navigation bar */
+.bar { top: calc(env(safe-area-inset-top, 0px) + 8px); margin: 8px 10px 0; border: 1px solid var(--glass-edge); border-radius: 22px; background: rgba(24, 24, 30, 0.55); -webkit-backdrop-filter: blur(22px) saturate(170%); backdrop-filter: blur(22px) saturate(170%); box-shadow: var(--depth), var(--hi); overflow: hidden; }
+.bar::after { height: 2px; background: linear-gradient(90deg, transparent, #f3881e 30%, #fff 50%, #f3881e 70%, transparent); opacity: 0.8; }
+.bar-in { padding: 6px 10px; }
+.brand-logo { filter: drop-shadow(0 2px 8px rgba(243, 136, 30, 0.35)); }
+
+/* titles */
+.page-title, .masthead h1 { text-shadow: 0 6px 30px rgba(243, 136, 30, 0.35); }
+.masthead::after { background: linear-gradient(90deg, #f3881e, #fff); border-radius: 99px; height: 5px; width: 96px; box-shadow: 0 0 18px rgba(243, 136, 30, 0.7); }
+
+/* glass panels */
+.card, .stat, .fieldset, .tile, .note, .total-box, .cost-scroll, .empty, .item, .alert, .mode-banner, .stage, .sync-status {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.035)); border: 1px solid var(--glass-edge); border-radius: 22px; box-shadow: var(--depth), var(--hi);
+}
+.stat, .fieldset, .tile, .total-box, .note { -webkit-backdrop-filter: blur(18px) saturate(150%); backdrop-filter: blur(18px) saturate(150%); }
+.stat { border-left: 1px solid var(--glass-edge); position: relative; overflow: hidden; }
+.stat::before { content: ''; position: absolute; left: 14px; right: 14px; top: 0; height: 3px; border-radius: 0 0 6px 6px; background: linear-gradient(90deg, #f3881e, rgba(243, 136, 30, 0)); }
+.item { border-radius: 20px; }
+.item:hover { border-color: rgba(243, 136, 30, 0.55); }
+.empty { border-style: dashed; border-color: rgba(243, 136, 30, 0.4); }
+.stage { border-radius: 16px; box-shadow: var(--hi); }
+.stage:has(input:checked) { background: linear-gradient(145deg, rgba(243, 136, 30, 0.28), rgba(243, 136, 30, 0.08)); border-color: #f3881e; box-shadow: 0 0 0 1px #f3881e, 0 10px 28px -10px rgba(243, 136, 30, 0.6); }
+.alert { border-left: 1px solid rgba(243, 136, 30, 0.6); background: linear-gradient(145deg, rgba(243, 136, 30, 0.30), rgba(243, 136, 30, 0.08)); box-shadow: var(--depth), 0 0 36px -8px rgba(243, 136, 30, 0.55), var(--hi); }
+.total-box { border: 1px solid rgba(243, 136, 30, 0.6); box-shadow: var(--depth), 0 0 40px -12px rgba(243, 136, 30, 0.7), var(--hi); }
+.cost-table th, .cost-table tfoot td, .plain-table th { background: rgba(30, 30, 36, 0.92); }
+
+/* tiles float in space */
+.tiles { perspective: 900px; }
+.tile { transform-style: preserve-3d; transform: translateZ(0) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform 0.18s ease-out, box-shadow 0.2s ease, border-color 0.2s ease; will-change: transform; }
+.tile > * { transform: translateZ(26px); }
+.tile:hover, .tile.tilting { border-color: rgba(243, 136, 30, 0.75); background: linear-gradient(145deg, rgba(243, 136, 30, 0.20), rgba(255, 255, 255, 0.05)); box-shadow: 0 34px 56px -18px rgba(0, 0, 0, 0.85), 0 0 34px -8px rgba(243, 136, 30, 0.55), var(--hi); }
+.tile:active { transform: translateZ(0) scale(0.985); }
+.tile-primary { background: linear-gradient(145deg, #f9a24d 0%, #f3881e 55%, #d9720f 100%); border-color: rgba(255, 255, 255, 0.45); box-shadow: 0 30px 50px -18px rgba(243, 136, 30, 0.7), 0 6px 18px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.55), inset 0 -2px 0 rgba(0, 0, 0, 0.18); }
+.tile-primary:hover { background: linear-gradient(145deg, #fbb261 0%, #f5921f 55%, #e07a12 100%); }
+
+/* buttons: raised, lit from above */
+.btn { border-radius: 16px; background: linear-gradient(180deg, #f9a24d, #f3881e 55%, #dd7510); border: 1px solid rgba(255, 255, 255, 0.35); box-shadow: 0 14px 24px -10px rgba(243, 136, 30, 0.75), 0 2px 6px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5); color: #150b00; }
+.btn:hover { background: linear-gradient(180deg, #fbb261, #f5921f 55%, #e27b13); border-color: rgba(255, 255, 255, 0.5); }
+.btn-secondary, .btn-danger { background: var(--glass); border: 1px solid var(--glass-edge); color: #fff; box-shadow: var(--hi), 0 8px 18px -10px rgba(0, 0, 0, 0.7); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.btn-secondary:hover { background: var(--glass-strong); border-color: #f3881e; color: #ffd2a1; }
+.btn-danger { color: #ff8c82; border-color: rgba(255, 116, 104, 0.45); }
+.btn-ghost { box-shadow: none; background: transparent; border-color: transparent; color: #ffc98f; }
+.btn-danger-solid { background: linear-gradient(180deg, #ee5047, #cf3027); border-color: rgba(255, 255, 255, 0.3); color: #fff; }
+.chip { border-radius: 99px; background: var(--glass); border: 1px solid var(--glass-edge); box-shadow: var(--hi); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.chip[aria-pressed="true"] { background: linear-gradient(180deg, #f9a24d, #f3881e); color: #150b00; box-shadow: 0 10px 20px -8px rgba(243, 136, 30, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.5); }
+
+/* inputs: recessed glass */
+input[type="text"], input[type="number"], input[type="search"], select, textarea { background: rgba(0, 0, 0, 0.38); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 14px; box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.06); }
+input[type="text"]:focus, input[type="number"]:focus, input[type="search"]:focus, select:focus, textarea:focus { border-color: #f3881e; box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(243, 136, 30, 0.3), 0 0 24px -4px rgba(243, 136, 30, 0.6); }
+input[readonly] { background: rgba(255, 255, 255, 0.05); }
+.date-input { background-color: rgba(0, 0, 0, 0.38) !important; }
+
+/* dialogs and calendar float above everything */
+.modal-back { background: rgba(4, 4, 8, 0.55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.modal { background: linear-gradient(150deg, rgba(48, 48, 58, 0.88), rgba(20, 20, 26, 0.92)); border: 1px solid var(--glass-edge); border-radius: 28px; box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.9), 0 0 60px -20px rgba(243, 136, 30, 0.5), var(--hi); -webkit-backdrop-filter: blur(26px) saturate(160%); backdrop-filter: blur(26px) saturate(160%); }
+.cal-nav { background: var(--glass); border-color: var(--glass-edge); box-shadow: var(--hi); }
+.cal-day { border-radius: 14px; }
+.cal-day.sel { background: linear-gradient(180deg, #f9a24d, #f3881e); box-shadow: 0 8px 16px -6px rgba(243, 136, 30, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.5); }
+.toast { border-radius: 18px; background: rgba(30, 30, 38, 0.85); border: 1px solid rgba(243, 136, 30, 0.6); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); box-shadow: var(--depth), 0 0 30px -8px rgba(243, 136, 30, 0.5); }
+
+/* footer floats as a small glass pill */
+.app-footer { left: 50%; right: auto; transform: translateX(-50%); bottom: calc(6px + env(safe-area-inset-bottom, 0px)); width: max-content; max-width: calc(100% - 24px); padding: 5px 14px; border: 1px solid var(--glass-edge); border-radius: 99px; background: rgba(24, 24, 30, 0.92); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); color: #cfc6bb; box-shadow: var(--hi), 0 8px 20px -8px rgba(0, 0, 0, 0.7); }
+body { padding-bottom: 44px; }
+#toasts { bottom: calc(52px + env(safe-area-inset-bottom, 0px)) !important; }
+.sync-chip { background: var(--glass); border-color: var(--glass-edge); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.sync-code { background: rgba(0, 0, 0, 0.4); border: 1px dashed #f3881e; border-radius: 16px; box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.5); }
+
+@media (prefers-reduced-motion: reduce) { .tile { transform: none !important; transition: none; } .tile > * { transform: none; } }
+/* ===== Bento grid dashboard ===== */
+.bento { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: dense; gap: 12px; align-items: stretch; }
+.bento > .top-logo, .bento > .masthead, .bento > .alert, .bento > .note { grid-column: 1 / -1; }
+.bento > .top-logo { order: -3; } .bento > .masthead { order: -2; } .bento > .alert, .bento > .note { order: -1; }
+.bento > section { display: contents; }
+.bento .sec-title { display: none; }
+.bento .cards, .bento .tiles { display: contents; }
+.bento .cards[style] { margin: 0 !important; }
+.bento .stat, .bento .tile { border-radius: 26px; padding: 16px; min-width: 0; }
+.bento .tile { min-height: 112px; justify-content: space-between; }
+.bento .tile strong { font-size: 21px; }
+.bento .tile span { font-size: 13px; }
+/* cell placement (sections: 1 summary, 2 PO tiles, 3 quotation tiles, 4 data) */
+.bento > section:nth-of-type(2) .tile:nth-child(1) { grid-column: 1 / -1; order: 1; min-height: 150px; }
+.bento > section:nth-of-type(2) .tile:nth-child(2) { order: 2; }
+.bento > section:nth-of-type(2) .tile:nth-child(3) { order: 3; }
+.bento > section:nth-of-type(1) .cards-count .stat:nth-child(1) { order: 4; grid-row: span 2; justify-content: space-between; }
+.bento > section:nth-of-type(1) .cards-count .stat:nth-child(2) { order: 5; }
+.bento > section:nth-of-type(1) .cards-count .stat:nth-child(3) { order: 6; }
+.bento > section:nth-of-type(1) .cards-count .stat:nth-child(4) { order: 7; }
+.bento > section:nth-of-type(2) .tile:nth-child(4) { order: 8; }
+.bento > section:nth-of-type(1) .cards:not(.cards-count) .stat:nth-child(1) { order: 9; grid-column: 1 / -1; }
+.bento > section:nth-of-type(1) .cards:not(.cards-count) .stat:nth-child(2) { order: 10; }
+.bento > section:nth-of-type(1) .cards:not(.cards-count) .stat:nth-child(3) { order: 11; }
+.bento > section:nth-of-type(2) .tile:nth-child(5) { order: 12; }
+.bento > section:nth-of-type(3) .tile:nth-child(1) { order: 13; grid-column: 1 / -1; min-height: 120px; }
+.bento > section:nth-of-type(3) .tile:nth-child(2) { order: 14; }
+.bento > section:nth-of-type(4) .tile:nth-child(1) { order: 15; }
+.bento > section:nth-of-type(4) .tile:nth-child(2) { order: 16; }
+/* cell personalities: white, orange and glass cells, like the logo */
+.bento .stat::before { display: none; }
+.bento .stat .v { font-size: 40px; }
+.bento > section:nth-of-type(1) .cards-count .stat:nth-child(1) { background: linear-gradient(160deg, #ffffff, #e9e4dc); border-color: #fff; }
+.bento > section:nth-of-type(1) .cards-count .stat:nth-child(1) .k { color: #5b5249; }
+.bento > section:nth-of-type(1) .cards-count .stat:nth-child(1) .v { color: #0b0b0d; font-size: 76px; text-shadow: none; }
+.bento > section:nth-of-type(2) .tile:nth-child(1) { background: linear-gradient(145deg, #f9a24d 0%, #f3881e 55%, #d9720f 100%); }
+.bento > section:nth-of-type(2) .tile:nth-child(1) strong { font-size: 30px; }
+.bento > section:nth-of-type(3) .tile:nth-child(1) { background: linear-gradient(145deg, #fff, #ece6dd); border-color: #fff; }
+.bento > section:nth-of-type(3) .tile:nth-child(1) strong { color: #0b0b0d; font-size: 26px; }
+.bento > section:nth-of-type(3) .tile:nth-child(1) span { color: #5b5249; }
+.bento > section:nth-of-type(1) .cards:not(.cards-count) .stat:nth-child(1) { background: linear-gradient(145deg, rgba(243, 136, 30, 0.30), rgba(243, 136, 30, 0.08)); border-color: rgba(243, 136, 30, 0.6); }
+/* ===== Simple tactile finish: soft raised cards, pressable buttons, clean type ===== */
+html { background: #121215; }
+body { background: radial-gradient(800px 420px at 100% -8%, rgba(243, 136, 30, 0.22), transparent 62%), linear-gradient(180deg, #17171b, #101013); background-attachment: fixed; }
+.card, .stat, .fieldset, .tile, .note, .total-box, .item, .empty, .mode-banner, .stage, .sync-status, .cost-scroll {
+  background: linear-gradient(180deg, #2a2a30, #1e1e23); border: 1px solid rgba(255, 255, 255, 0.07); border-radius: 22px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10), 0 4px 0 #0c0c0e, 0 14px 24px -10px rgba(0, 0, 0, 0.7); -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+.item, .stage { border-radius: 18px; }
+.stat::before, .stat::after { display: none !important; }
+.stat .k, .stat .s { text-shadow: none; }
+.stat .v { color: #f3881e; text-shadow: none; }
+.cost-scroll { background: #17171b; box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.6); }
+
+/* bar and footer */
+.bar { background: linear-gradient(180deg, #2c2c32, #202025); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10), 0 4px 0 #0c0c0e, 0 12px 20px -8px rgba(0, 0, 0, 0.7); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.bar::after { height: 2px; background: linear-gradient(90deg, transparent, #f3881e 30%, #f3881e 70%, transparent); }
+.app-footer { background: #202025; border: 1px solid rgba(255, 255, 255, 0.08); color: #bdb5aa; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+/* tiles: no tilt, they press like buttons */
+.tile { transform: none !important; transition: transform 0.08s, box-shadow 0.08s; }
+.tile > * { transform: none !important; }
+.tile:hover, .tile.tilting { background: linear-gradient(180deg, #33333a, #25252b); border-color: rgba(243, 136, 30, 0.55); }
+.tile:active { transform: translateY(3px) !important; box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5), 0 1px 0 #0c0c0e; }
+.tile-primary, .bento > section:nth-of-type(2) .tile:nth-child(1) { background: linear-gradient(180deg, #f9a24d, #f3881e 55%, #db7510); border-color: rgba(255, 255, 255, 0.35); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), 0 4px 0 #8a4300, 0 16px 26px -10px rgba(243, 136, 30, 0.65); }
+.tile-primary strong, .bento > section:nth-of-type(2) .tile:nth-child(1) strong { color: #1c0d00; text-shadow: none; }
+.tile-primary span, .bento > section:nth-of-type(2) .tile:nth-child(1) span { color: #4a2400; }
+.bento > section:nth-of-type(3) .tile:nth-child(1), .bento > section:nth-of-type(1) .cards-count .stat:nth-child(1) { background: linear-gradient(180deg, #ffffff, #e4dfd6); border-color: #fff; box-shadow: inset 0 1px 0 #fff, 0 4px 0 #8d867b, 0 16px 26px -10px rgba(0, 0, 0, 0.7); }
+.bento > section:nth-of-type(1) .cards-count .stat:nth-child(1) .v { color: #0d0d10; }
+.bento > section:nth-of-type(1) .cards:not(.cards-count) .stat:nth-child(1) { background: linear-gradient(180deg, #4a3318, #2c1f10); border-color: rgba(243, 136, 30, 0.45); }
+.count-pill { background: #f3881e; color: #150b00; }
+
+/* buttons */
+.btn { border-radius: 14px; background: linear-gradient(180deg, #f9a24d, #f3881e 55%, #db7510); border: 1px solid rgba(255, 255, 255, 0.3); color: #150b00; text-shadow: none; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 3px 0 #8a4300, 0 10px 16px -6px rgba(243, 136, 30, 0.6); transition: transform 0.08s, box-shadow 0.08s; }
+.btn:active { transform: translateY(2px); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px 0 #8a4300; }
+.btn-secondary, .btn-danger { background: linear-gradient(180deg, #34343b, #26262c); border: 1px solid rgba(255, 255, 255, 0.10); color: #fff; text-shadow: none; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 3px 0 #0c0c0e; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.btn-secondary:hover { background: linear-gradient(180deg, #3d3d45, #2c2c33); color: #ffd2a1; border-color: rgba(243, 136, 30, 0.6); }
+.btn-danger { color: #ff8c82; }
+.btn-ghost { background: transparent; box-shadow: none; border-color: transparent; color: #ffc98f; }
+.chip { background: linear-gradient(180deg, #34343b, #26262c); border: 1px solid rgba(255, 255, 255, 0.10); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 2px 0 #0c0c0e; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.chip[aria-pressed="true"] { background: linear-gradient(180deg, #f9a24d, #f3881e); color: #150b00; box-shadow: inset 0 2px 4px rgba(120, 50, 0, 0.5); }
+
+/* inputs: softly recessed */
+input[type="text"], input[type="password"], input[type="number"], input[type="search"], select, textarea { background: #131316; border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 14px; box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.6); }
+input[readonly] { background: #1a1a1e; }
+.date-input { background-color: #131316 !important; }
+.modal { background: linear-gradient(180deg, #2c2c32, #202025); border: 1px solid rgba(255, 255, 255, 0.09); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10), 0 6px 0 #0c0c0e, 0 30px 50px rgba(0, 0, 0, 0.7); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.modal-back { background: rgba(0, 0, 0, 0.62); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.toast { background: #26262c; box-shadow: 0 4px 0 #0c0c0e, 0 12px 22px rgba(0, 0, 0, 0.6); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.cost-table th, .cost-table tfoot td, .plain-table th { background: #26262c; }
+.sync-code, .total-box .v { background: #131316; box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.6); border-radius: 12px; }
+/* ===== Light theme (only when data-theme="light"): warm paper background, white cards, orange + black from the logo ===== */
+html[data-theme="light"] { color-scheme: light; --bg: #f5f2ed; --surface: #ffffff; --surface-2: #f0ece5; --ink: #141418; --text: #2a2723; --muted: #6f675d; --line: #e4ded4; --line-strong: #cfc7ba; --primary: #f3881e; --primary-hover: #e57c12; --on-primary: #1c0d00; --focus: #f3881e;
+  --good: #1f7a46; --good-bg: #e3f4ea; --warn: #9a5a00; --warn-bg: #fdf0da; --bad: #c0332a; --bad-bg: #fde8e6; --info: #9a5a00; --info-bg: #fdf0da; --neutral-bg: #ece7df; --scrim: rgba(20, 20, 24, 0.45); }
+html[data-theme="light"] { background: #f5f2ed; }
+html[data-theme="light"] body { background: radial-gradient(800px 420px at 100% -8%, rgba(243, 136, 30, 0.20), transparent 62%), linear-gradient(180deg, #f8f5f0, #efebe4); background-attachment: fixed; color: #2a2723; }
+html[data-theme="light"] ::placeholder { color: #9b9387; }
+html[data-theme="light"] .page-title,
+html[data-theme="light"] .masthead h1 { color: #141418; text-shadow: none; }
+html[data-theme="light"] .masthead p,
+html[data-theme="light"] .page-sub { color: #6f675d; }
+html[data-theme="light"] .masthead::after { background: linear-gradient(90deg, #f3881e, #f9ae5c); box-shadow: none; }
+html[data-theme="light"] .sec-title { color: #c76a08; border-bottom-color: #e4ded4; }
+html[data-theme="light"] .brand-logo { filter: none; }
+html[data-theme="light"] .card,
+html[data-theme="light"] .stat,
+html[data-theme="light"] .fieldset,
+html[data-theme="light"] .tile,
+html[data-theme="light"] .note,
+html[data-theme="light"] .total-box,
+html[data-theme="light"] .item,
+html[data-theme="light"] .empty,
+html[data-theme="light"] .mode-banner,
+html[data-theme="light"] .stage,
+html[data-theme="light"] .sync-status,
+html[data-theme="light"] .cost-scroll {
+  background: #ffffff; border: 1px solid #e8e2d8; color: #2a2723;
+  box-shadow: 0 1px 0 #fff inset, 0 2px 0 #e3ddd2, 0 12px 24px -12px rgba(60, 45, 20, 0.28);
+}
+html[data-theme="light"] .cost-scroll { background: #faf8f4; box-shadow: inset 0 2px 6px rgba(60, 45, 20, 0.10); }
+html[data-theme="light"] .empty { border-style: dashed; border-color: #e0b783; background: #fffaf2; }
+html[data-theme="light"] .stat .k,
+html[data-theme="light"] .stat .s,
+html[data-theme="light"] .facts dt,
+html[data-theme="light"] .detail-grid dt,
+html[data-theme="light"] .total-box .k { color: #7a7266; }
+html[data-theme="light"] .stat .v { color: #e07a0e; }
+html[data-theme="light"] .stat .v-money,
+html[data-theme="light"] .total-box .v { color: #141418; }
+html[data-theme="light"] .item-title,
+html[data-theme="light"] .tile strong,
+html[data-theme="light"] .fieldset > h2,
+html[data-theme="light"] .modal h2,
+html[data-theme="light"] .mode-banner b,
+html[data-theme="light"] .empty strong,
+html[data-theme="light"] .cal-head strong { color: #141418; text-shadow: none; }
+html[data-theme="light"] .item-sub,
+html[data-theme="light"] .tile span { color: #6f675d; }
+html[data-theme="light"] .field > label,
+html[data-theme="light"] .field > .lbl { color: #2a2723; text-shadow: none; }
+html[data-theme="light"] .field .hint,
+html[data-theme="light"] .muted { color: #6f675d; }
+html[data-theme="light"] .bar { background: rgba(255, 255, 255, 0.92); border: 1px solid #e8e2d8; box-shadow: 0 2px 0 #e3ddd2, 0 12px 20px -10px rgba(60, 45, 20, 0.3); }
+html[data-theme="light"] .bar::after { background: linear-gradient(90deg, transparent, #f3881e 30%, #f3881e 70%, transparent); }
+html[data-theme="light"] .app-footer { background: #ffffff; border: 1px solid #e4ded4; color: #6f675d; box-shadow: 0 4px 10px rgba(60, 45, 20, 0.15); }
+html[data-theme="light"] .tile:hover,
+html[data-theme="light"] .tile.tilting { background: #fffaf2; border-color: #f3881e; }
+html[data-theme="light"] .tile:active { box-shadow: inset 0 2px 6px rgba(60, 45, 20, 0.2), 0 1px 0 #e3ddd2; }
+html[data-theme="light"] .tile-primary,
+html[data-theme="light"] .bento > section:nth-of-type(2) .tile:nth-child(1) { background: linear-gradient(180deg, #f9a24d, #f3881e 55%, #e07a0e); border-color: #e07a0e; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), 0 4px 0 #b8610a, 0 16px 26px -10px rgba(243, 136, 30, 0.6); }
+html[data-theme="light"] .tile-primary strong,
+html[data-theme="light"] .bento > section:nth-of-type(2) .tile:nth-child(1) strong { color: #1c0d00; }
+html[data-theme="light"] .tile-primary span,
+html[data-theme="light"] .bento > section:nth-of-type(2) .tile:nth-child(1) span { color: #4a2400; }
+html[data-theme="light"] .bento > section:nth-of-type(3) .tile:nth-child(1),
+html[data-theme="light"] .bento > section:nth-of-type(1) .cards-count .stat:nth-child(1) { background: linear-gradient(180deg, #2b2b31, #141418); border-color: #141418; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 4px 0 #000, 0 16px 26px -10px rgba(20, 20, 24, 0.6); }
+html[data-theme="light"] .bento > section:nth-of-type(3) .tile:nth-child(1) strong { color: #fff; }
+html[data-theme="light"] .bento > section:nth-of-type(3) .tile:nth-child(1) span { color: #cfc7ba; }
+html[data-theme="light"] .bento > section:nth-of-type(1) .cards-count .stat:nth-child(1) .k { color: #cfc7ba; }
+html[data-theme="light"] .bento > section:nth-of-type(1) .cards-count .stat:nth-child(1) .v { color: #f9a24d; }
+html[data-theme="light"] .bento > section:nth-of-type(1) .cards:not(.cards-count) .stat:nth-child(1) { background: linear-gradient(180deg, #fff3e0, #ffe6c4); border-color: #f3c58a; }
+html[data-theme="light"] .count-pill { background: #f3881e; color: #1c0d00; }
+html[data-theme="light"] .btn { background: linear-gradient(180deg, #f9a24d, #f3881e 55%, #e07a0e); border-color: #d26f0a; color: #1c0d00; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 3px 0 #b8610a, 0 10px 16px -6px rgba(243, 136, 30, 0.55); }
+html[data-theme="light"] .btn-secondary,
+html[data-theme="light"] .btn-danger { background: linear-gradient(180deg, #ffffff, #f3efe8); border: 1px solid #d8d1c4; color: #141418; box-shadow: inset 0 1px 0 #fff, 0 3px 0 #ddd6c9; }
+html[data-theme="light"] .btn-secondary:hover { background: #fffaf2; color: #b85f05; border-color: #f3881e; }
+html[data-theme="light"] .btn-danger { color: #c0332a; border-color: #eab3ae; }
+html[data-theme="light"] .btn-ghost { color: #b85f05; background: transparent; box-shadow: none; }
+html[data-theme="light"] .btn-ghost:hover { background: rgba(243, 136, 30, 0.12); }
+html[data-theme="light"] .btn-danger-solid { background: linear-gradient(180deg, #e8574e, #c0332a); border-color: #a22a22; color: #fff; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 3px 0 #7d1d17; }
+html[data-theme="light"] .chip { background: linear-gradient(180deg, #ffffff, #f3efe8); border: 1px solid #d8d1c4; color: #141418; box-shadow: inset 0 1px 0 #fff, 0 2px 0 #ddd6c9; }
+html[data-theme="light"] .chip[aria-pressed="true"] { background: linear-gradient(180deg, #f9a24d, #f3881e); border-color: #d26f0a; color: #1c0d00; box-shadow: inset 0 2px 4px rgba(120, 50, 0, 0.35); }
+html[data-theme="light"] input[type="text"],
+html[data-theme="light"] input[type="password"],
+html[data-theme="light"] input[type="number"],
+html[data-theme="light"] input[type="search"],
+html[data-theme="light"] select,
+html[data-theme="light"] textarea { background: #fbf9f5; border: 1px solid #d8d1c4; color: #141418; box-shadow: inset 0 2px 5px rgba(60, 45, 20, 0.10); }
+html[data-theme="light"] input[type="text"]:focus,
+html[data-theme="light"] input[type="password"]:focus,
+html[data-theme="light"] input[type="number"]:focus,
+html[data-theme="light"] input[type="search"]:focus,
+html[data-theme="light"] select:focus,
+html[data-theme="light"] textarea:focus { border-color: #f3881e; box-shadow: inset 0 2px 5px rgba(60, 45, 20, 0.08), 0 0 0 3px rgba(243, 136, 30, 0.28); }
+html[data-theme="light"] input[readonly] { background: #efebe4; color: #5b5249; }
+html[data-theme="light"] .date-input { background-color: #fbf9f5 !important; }
+html[data-theme="light"] .stage:has(input:checked) { background: #fff3e0; border-color: #f3881e; box-shadow: inset 0 0 0 1px #f3881e; }
+html[data-theme="light"] .cost-table th,
+html[data-theme="light"] .plain-table th { background: #f0ece5; color: #7a5a2a; }
+html[data-theme="light"] .cost-table tfoot td { background: #f0ece5; color: #141418; border-top-color: #f3881e; }
+html[data-theme="light"] .cost-table td,
+html[data-theme="light"] .plain-table th,
+html[data-theme="light"] .plain-table td { border-bottom-color: #ece6dc; }
+html[data-theme="light"] .total-box { border-color: #f3c58a; box-shadow: 0 2px 0 #e3ddd2, 0 12px 24px -12px rgba(243, 136, 30, 0.45); }
+html[data-theme="light"] .sync-code { background: #fffaf2; color: #c76a08; border-color: #f3881e; box-shadow: none; }
+html[data-theme="light"] .alert { background: linear-gradient(180deg, #fff3e0, #ffe9cc); border-color: #f3b672; color: #7a4300; box-shadow: 0 2px 0 #f0d3a8; }
+html[data-theme="light"] .alert strong { color: #5a3000; }
+html[data-theme="light"] .alert-row { color: #2a2723; }
+html[data-theme="light"] .alert-row .btn { background: #fff; color: #141418; border-color: #d8d1c4; box-shadow: 0 2px 0 #ddd6c9; }
+html[data-theme="light"] .note.info { background: #fff3e0; border-color: #f3c58a; color: #7a4300; }
+html[data-theme="light"] .badge,
+html[data-theme="light"] .tag { border-radius: 8px; }
+html[data-theme="light"] .modal-back { background: rgba(20, 20, 24, 0.45); }
+html[data-theme="light"] .modal { background: #ffffff; color: #2a2723; border: 1px solid #e8e2d8; box-shadow: 0 6px 0 #e3ddd2, 0 30px 50px -10px rgba(40, 30, 10, 0.45); }
+html[data-theme="light"] .toast { background: #141418; color: #fff; border: 1px solid #141418; box-shadow: 0 4px 0 #000, 0 12px 22px rgba(0, 0, 0, 0.35); }
+html[data-theme="light"] .toast.err { background: #c0332a; border-color: #a22a22; color: #fff; }
+html[data-theme="light"] .cal-nav { background: linear-gradient(180deg, #fff, #f3efe8); border-color: #d8d1c4; color: #c76a08; box-shadow: 0 2px 0 #ddd6c9; }
+html[data-theme="light"] .cal-day { color: #2a2723; }
+html[data-theme="light"] .cal-day:hover { background: #f3efe8; }
+html[data-theme="light"] .cal-day.today { border-color: #f3881e; }
+html[data-theme="light"] .cal-day.sel { background: linear-gradient(180deg, #f9a24d, #f3881e); color: #1c0d00; box-shadow: 0 3px 0 #b8610a; }
+html[data-theme="light"] .cal-dow { color: #7a7266; }
+html[data-theme="light"] .sync-chip { background: #fff; border-color: #d8d1c4; color: #2a2723; backdrop-filter: none; -webkit-backdrop-filter: none; }
+/* sync status colours on the light theme */
+html[data-theme="light"] .sync-status.wait { background: #fff3e0; border-color: #f3c58a; } html[data-theme="light"] .sync-status.wait b { color: #b85f05; }
+html[data-theme="light"] .sync-status.ok { background: #e3f4ea; border-color: #9fd3b4; } html[data-theme="light"] .sync-status.ok b { color: #1f7a46; }
+html[data-theme="light"] .sync-status.bad { background: #fde8e6; border-color: #eab3ae; } html[data-theme="light"] .sync-status.bad b { color: #c0332a; }
+html[data-theme="light"] .sync-status b { text-shadow: none; } html[data-theme="light"] .sync-status span { color: #2a2723; }
+/* theme toggle */
+.top-logo { align-items: center; justify-content: space-between; }
+.theme-toggle { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 4px 14px 4px 6px; border-radius: 99px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); font-weight: 700; font-size: 14px; cursor: pointer; box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25); }
+.theme-toggle:active { transform: translateY(2px); box-shadow: none; }
+.tt-track { position: relative; width: 52px; height: 30px; border-radius: 99px; background: #3a3a42; box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.55); flex: none; transition: background 0.2s; }
+.tt-knob { position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff, #cfc7ba); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); transition: transform 0.2s; display: grid; place-items: center; }
+.tt-knob::after { content: ''; width: 10px; height: 10px; border-radius: 50%; background: #3a3a42; box-shadow: inset -3px -2px 0 0 #fff; }
+html[data-theme="light"] .tt-track { background: #f3881e; }
+html[data-theme="light"] .tt-knob { transform: translateX(22px); }
+html[data-theme="light"] .tt-knob::after { background: #f3881e; box-shadow: 0 0 0 2px #fff, 0 0 0 4px rgba(243, 136, 30, 0.45); }
+.tt-label { display: none; }
+html[data-theme="light"] .tt-light, html:not([data-theme="light"]) .tt-dark { display: inline; }
+/* logos: white lettering for dark, black lettering for light */
+.logo-on-light { display: none; }
+html[data-theme="light"] .logo-on-dark { display: none; }
+html[data-theme="light"] .logo-on-light { display: block; }
+</style>
+<link rel="stylesheet" href="./desktop-ui.css">
+<link rel="stylesheet" href="./desktop-glass.css">
+<div id="app"><p class="boot">Opening your records…</p></div>
+<div id="toasts" aria-live="polite"></div>
+<div class="app-footer">All rights reserved by Spark Tech Automation</div>
+<script>
+/* spatial depth: tiles tilt gently toward the finger / pointer */
+(function () {
+  var cur = null;
+  function reset() { if (cur) { cur.style.setProperty('--rx', '0deg'); cur.style.setProperty('--ry', '0deg'); cur.classList.remove('tilting'); cur = null; } }
+  document.addEventListener('pointermove', function (e) {
+    var t = e.target.closest && e.target.closest('.tile');
+    if (!t) { reset(); return; }
+    if (cur && cur !== t) reset();
+    var r = t.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+    cur = t; t.classList.add('tilting');
+    t.style.setProperty('--ry', (x * 9).toFixed(2) + 'deg'); t.style.setProperty('--rx', (-y * 9).toFixed(2) + 'deg');
+  }, { passive: true });
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (n) { document.addEventListener(n, reset, { passive: true }); });
+  document.addEventListener('scroll', reset, { passive: true, capture: true });
+})();
+</script>
+<div id="modal-root"></div>
+<script>
+/* Manufacturing Business Manager: pure logic (no DOM). Used by the page and by tests. */
+(function (root) {
+  'use strict';
+
+  var PARAMS = [
+    ['rawMaterial', 'Raw Material'],
+    ['machining', 'Machining'],
+    ['fabMaterial', 'Fab Material'],
+    ['fabrication', 'Fabrication'],
+    ['fixture', 'Fixture'],
+    ['profileCutting', 'Profile Cutting'],
+    ['laser10', 'Laser 10mm'],
+    ['coverLaser', 'Cover Laser'],
+    ['hiwin', 'Hiwin Material'],
+    ['hardware', 'Hardware'],
+    ['powderCoat', 'Powder Coat'],
+    ['pneumatic', 'Pneumatic Material'],
+    ['hydraulic', 'Hydraulic Material'],
+    ['electrical', 'Electrical Material'],
+    ['plcHmi', 'PLC/HMI'],
+    ['motors', 'Motors'],
+    ['programming', 'Programming'],
+    ['transport', 'Transport'],
+    ['labour', 'Labour'],
+    ['rubber', 'Rubber'],
+    ['other', 'Other']
+  ];
+  var PO_STATUSES = ['PO Received', 'Design', 'Purchase', 'Assembly', 'Programming', 'Testing', 'Dispatch', 'Commissioning', 'Completed'];
+  var PAY_STATUSES = ['Not Due', 'Due', 'Partially Paid', 'Paid'];
+  var CURRENCIES = ['INR', 'USD', 'EUR', 'GBP', 'AED', 'SAR', 'SGD', 'AUD', 'CAD', 'JPY', 'CNY'];
+  var DEFAULT_SETTINGS = { currency: 'INR', allowNegative: false, activeReminderDays: 3, paymentReminderDays: 30, quoteCounter: 0 };
+  var DAY = 864e5;
+
+  /* ---------- small helpers ---------- */
+  function str(v) { return v === null || v === undefined ? '' : String(v); }
+  function trim(v) { return str(v).trim(); }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function clone(o) { return JSON.parse(JSON.stringify(o)); }
+  function newId() {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
+    return 'id-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+  }
+  function isDateStr(s) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(s || '')) return false;
+    var p = s.split('-');
+    var d = new Date(+p[0], +p[1] - 1, +p[2]);
+    return d.getFullYear() === +p[0] && d.getMonth() === +p[1] - 1 && d.getDate() === +p[2];
+  }
+  function isIso(s) { return typeof s === 'string' && s.length >= 10 && !isNaN(Date.parse(s)); }
+  function todayLocal(now) {
+    now = now || new Date();
+    return now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate());
+  }
+  function isCurrency(c) { return typeof c === 'string' && /^[A-Z]{3}$/.test(c); }
+
+  /* ---------- money ---------- */
+  function safeNum(v) {
+    var n = typeof v === 'number' ? v : parseFloat(str(v).replace(/,/g, ''));
+    return isFinite(n) ? n : 0;
+  }
+  function toCents(v) { return Math.round(Number((safeNum(v) * 100).toPrecision(15))); }
+  function roundMoney(v) { return toCents(v) / 100; }
+
+  // Parses what a person typed. Blank is valid and means zero.
+  function parseAmount(raw, allowNeg) {
+    function bad(msg) { return { ok: false, value: 0, blank: false, error: msg }; }
+    if (raw === null || raw === undefined) return { ok: true, value: 0, blank: true };
+    var s = String(raw).trim();
+    if (s === '') return { ok: true, value: 0, blank: true };
+    s = s.replace(/\s+/g, '');
+    if (s.indexOf(',') !== -1) {
+      if (!/^[+-]?\d{1,3}(,\d{2,3})*(\.\d*)?$/.test(s)) return bad('Use digits and one decimal point, for example 12500.50');
+      s = s.replace(/,/g, '');
+    }
+    if (!/^[+-]?(\d+\.?\d*|\.\d+)$/.test(s)) return bad('Use digits and one decimal point, for example 12500.50');
+    var v = Number(s);
+    if (!isFinite(v) || Math.abs(v) > 1e12) return bad('That number is too large');
+    if (v < 0 && !allowNeg) return bad('Negative amounts are turned off in Settings');
+    return { ok: true, value: v + 0, blank: false };
+  }
+
+  function totalCost(costs) {
+    var c = 0;
+    for (var i = 0; i < PARAMS.length; i++) c += toCents(costs ? costs[PARAMS[i][0]] : 0);
+    return c / 100;
+  }
+  function quoteDifference(quoted, total) {
+    if (quoted === null || quoted === undefined) return null;
+    return (toCents(quoted) - toCents(total)) / 100;
+  }
+  function sumByCurrency(items, getter) {
+    var m = {}, out = {};
+    items.forEach(function (it) {
+      var v = getter(it);
+      if (v === null || v === undefined) return;
+      var cur = it.currency || 'INR';
+      m[cur] = (m[cur] || 0) + toCents(v);
+    });
+    Object.keys(m).forEach(function (k) { out[k] = m[k] / 100; });
+    return out;
+  }
+
+  /* ---------- quotation numbers ---------- */
+  function numPart(n) {
+    var m = /(\d+)\s*$/.exec(str(n));
+    return m ? parseInt(m[1], 10) : 0;
+  }
+  function nextQuoteSeq(quotes, counter) {
+    var max = Number(counter) || 0;
+    quotes.forEach(function (q) { max = Math.max(max, numPart(q.number)); });
+    return max + 1;
+  }
+  function formatQuoteNumber(seq) { return 'Q-' + String(seq).padStart(4, '0'); }
+
+  /* ---------- normalisers (safe defaults for old or damaged records) ---------- */
+  function normSettings(s) {
+    var o = {};
+    s = s && typeof s === 'object' ? s : {};
+    o.currency = isCurrency(s.currency) ? s.currency : DEFAULT_SETTINGS.currency;
+    o.allowNegative = s.allowNegative === true;
+    var a = parseInt(s.activeReminderDays, 10), p = parseInt(s.paymentReminderDays, 10), c = parseInt(s.quoteCounter, 10);
+    o.activeReminderDays = a >= 1 && a <= 365 ? a : DEFAULT_SETTINGS.activeReminderDays;
+    o.paymentReminderDays = p >= 1 && p <= 365 ? p : DEFAULT_SETTINGS.paymentReminderDays;
+    o.quoteCounter = c >= 0 ? c : 0;
+    return o;
+  }
+
+  function normQuote(raw) {
+    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
+    var id = trim(raw.id);
+    if (!id) return null;
+    var costs = {};
+    PARAMS.forEach(function (p) { costs[p[0]] = roundMoney(raw.costs && typeof raw.costs === 'object' ? raw.costs[p[0]] : 0); });
+    var qa = raw.quotedAmount === null || raw.quotedAmount === undefined || raw.quotedAmount === '' ? null : roundMoney(raw.quotedAmount);
+    var nowIso = new Date().toISOString();
+    var created = isIso(raw.createdAt) ? raw.createdAt : nowIso;
+    return {
+      id: id,
+      number: trim(raw.number),
+      customer: trim(raw.customer),
+      project: trim(raw.project),
+      date: isDateStr(raw.date) ? raw.date : todayLocal(new Date(created)),
+      remarks: str(raw.remarks),
+      linkedRef: trim(raw.linkedRef),
+      currency: isCurrency(raw.currency) ? raw.currency : 'INR',
+      costs: costs,
+      totalCost: totalCost(costs),
+      quotedAmount: qa,
+      createdAt: created,
+      updatedAt: isIso(raw.updatedAt) ? raw.updatedAt : created
+    };
+  }
+
+  function normReminder(r) {
+    if (r && typeof r === 'object' && (r.kind === 'active' || r.kind === 'payment') && isIso(r.dueAt)) return { kind: r.kind, dueAt: r.dueAt };
+    return null;
+  }
+
+  function normPO(raw) {
+    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
+    var id = trim(raw.id);
+    if (!id) return null;
+    var nowIso = new Date().toISOString();
+    var created = isIso(raw.createdAt) ? raw.createdAt : nowIso;
+    var hist = [];
+    if (Array.isArray(raw.statusHistory)) {
+      raw.statusHistory.forEach(function (h) {
+        if (h && typeof h === 'object' && isIso(h.at) && PO_STATUSES.indexOf(h.to) >= 0) {
+          hist.push({ from: PO_STATUSES.indexOf(h.from) >= 0 ? h.from : null, to: h.to, at: h.at });
+        }
+      });
+    }
+    var val = raw.value === null || raw.value === undefined || raw.value === '' ? null : roundMoney(raw.value);
+    var paid = raw.amountPaid === null || raw.amountPaid === undefined || raw.amountPaid === '' ? null : roundMoney(raw.amountPaid);
+    return {
+      id: id,
+      customer: trim(raw.customer),
+      poNumber: trim(raw.poNumber),
+      project: trim(raw.project),
+      quotationId: trim(raw.quotationId),
+      quotationNumber: trim(raw.quotationNumber),
+      poDate: isDateStr(raw.poDate) ? raw.poDate : '',
+      deliveryDate: isDateStr(raw.deliveryDate) ? raw.deliveryDate : '',
+      value: val,
+      currency: isCurrency(raw.currency) ? raw.currency : 'INR',
+      status: PO_STATUSES.indexOf(raw.status) >= 0 ? raw.status : 'PO Received',
+      paymentStatus: PAY_STATUSES.indexOf(raw.paymentStatus) >= 0 ? raw.paymentStatus : 'Not Due',
+      amountPaid: paid,
+      paymentDueDate: isDateStr(raw.paymentDueDate) ? raw.paymentDueDate : '',
+      paymentRemarks: str(raw.paymentRemarks),
+      remarks: str(raw.remarks),
+      createdAt: created,
+      updatedAt: isIso(raw.updatedAt) ? raw.updatedAt : created,
+      statusUpdatedAt: isIso(raw.statusUpdatedAt) ? raw.statusUpdatedAt : (isIso(raw.updatedAt) ? raw.updatedAt : created),
+      statusHistory: hist,
+      reminder: normReminder(raw.reminder)
+    };
+  }
+
+  /* ---------- PO calculations ---------- */
+  function outstanding(po) {
+    if (po.value === null || po.value === undefined) return null;
+    if (po.paymentStatus === 'Paid') return 0;
+    return Math.max(0, (toCents(po.value) - toCents(po.amountPaid || 0)) / 100);
+  }
+  function isOverdue(po, today) {
+    return !!po.deliveryDate && po.status !== 'Completed' && po.deliveryDate < (today || todayLocal());
+  }
+
+  /* ---------- reminders (shown inside the app; a web page cannot push notifications) ---------- */
+  function addDaysIso(now, days) { return new Date(now.getTime() + days * DAY).toISOString(); }
+
+  // Works out the reminder a PO should carry after it was created or changed.
+  // prev is the PO as it was before the change (null for a new PO).
+  function computeReminder(po, prev, now, s) {
+    var cur = normReminder(po.reminder);
+    if (po.status !== 'Completed') {
+      var changed = !prev || prev.status !== po.status;
+      if (changed || !cur || cur.kind !== 'active') return { kind: 'active', dueAt: addDaysIso(now, s.activeReminderDays) };
+      return cur;
+    }
+    if (po.paymentStatus === 'Paid') return null;
+    var wasCompleted = !!prev && prev.status === 'Completed';
+    if (!wasCompleted || !cur || cur.kind !== 'payment') return { kind: 'payment', dueAt: addDaysIso(now, s.paymentReminderDays) };
+    return cur;
+  }
+  // The reminder to show. Records without stored reminder data get one worked out from their last status update.
+  function reminderOf(po, s) {
+    var cur = normReminder(po.reminder);
+    if (cur) return cur;
+    var base = isIso(po.statusUpdatedAt) ? new Date(po.statusUpdatedAt) : new Date(po.createdAt);
+    if (po.status !== 'Completed') return { kind: 'active', dueAt: addDaysIso(base, s.activeReminderDays) };
+    if (po.paymentStatus !== 'Paid') return { kind: 'payment', dueAt: addDaysIso(base, s.paymentReminderDays) };
+    return null;
+  }
+  function isReminderDue(po, now, s) {
+    var r = reminderOf(po, s);
+    return !!r && new Date(r.dueAt).getTime() <= now.getTime();
+  }
+  function snoozeReminder(po, now, s) {
+    var r = reminderOf(po, s);
+    if (!r) return null;
+    return { kind: r.kind, dueAt: addDaysIso(now, r.kind === 'payment' ? s.paymentReminderDays : s.activeReminderDays) };
+  }
+
+  /* ---------- PO updates ---------- */
+  function applyStatus(po, newStatus, now, s) {
+    var iso = now.toISOString();
+    var rec = clone(po);
+    var hist = Array.isArray(po.statusHistory) ? po.statusHistory.slice() : [];
+    hist.push({ from: po.status, to: newStatus, at: iso });
+    rec.status = newStatus;
+    rec.statusHistory = hist;
+    rec.statusUpdatedAt = iso;
+    rec.updatedAt = iso;
+    rec.reminder = computeReminder(rec, po, now, s);
+    return rec;
+  }
+  function applyPayment(po, pay, now, s) {
+    var rec = clone(po);
+    rec.paymentStatus = pay.paymentStatus;
+    rec.amountPaid = pay.amountPaid;
+    rec.paymentDueDate = pay.paymentDueDate;
+    rec.paymentRemarks = pay.paymentRemarks;
+    rec.updatedAt = now.toISOString();
+    rec.reminder = computeReminder(rec, po, now, s);
+    return rec;
+  }
+
+  /* ---------- validation ---------- */
+  function paymentChecks(status, value, ap, errors) {
+    if (!ap.ok) { errors.amountPaid = ap.error; return; }
+    if (!ap.blank && value !== null && toCents(ap.value) > toCents(value)) {
+      errors.amountPaid = 'Amount paid cannot be more than the project value';
+      return;
+    }
+    if (status === 'Partially Paid') {
+      if (ap.blank || ap.value <= 0) errors.amountPaid = 'Enter the amount received so far';
+      else if (value !== null && toCents(ap.value) >= toCents(value)) errors.amountPaid = 'Amount paid equals the project value. Choose Paid instead.';
+    }
+  }
+  function cleanPaid(status, value, ap) {
+    if (status === 'Paid' && value !== null) return value;
+    return ap.blank ? null : roundMoney(ap.value);
+  }
+
+  function validateQuote(f, o) {
+    o = o || {};
+    var errors = {};
+    var customer = trim(f.customer), project = trim(f.project), date = trim(f.date);
+    if (!customer) errors.customer = 'Customer name is required';
+    if (!project) errors.project = 'Project title is required';
+    if (!isDateStr(date)) errors.date = 'Choose a quotation date';
+    var costs = {};
+    PARAMS.forEach(function (p) {
+      var r = parseAmount(f.costs ? f.costs[p[0]] : '', o.allowNeg);
+      if (!r.ok) errors['cost-' + p[0]] = r.error;
+      costs[p[0]] = r.ok ? roundMoney(r.value) : 0;
+    });
+    var qr = parseAmount(f.quotedAmount, o.allowNeg);
+    if (!qr.ok) errors.quoted = qr.error;
+    return {
+      ok: Object.keys(errors).length === 0,
+      errors: errors,
+      clean: {
+        customer: customer,
+        project: project,
+        date: date,
+        remarks: trim(f.remarks),
+        linkedRef: trim(f.linkedRef),
+        currency: isCurrency(f.currency) ? f.currency : (o.defaultCurrency || 'INR'),
+        costs: costs,
+        quotedAmount: qr.ok && !qr.blank ? roundMoney(qr.value) : null
+      }
+    };
+  }
+
+  function sameText(a, b) { return trim(a).toLowerCase() === trim(b).toLowerCase(); }
+
+  function validatePO(f, o) {
+    o = o || {};
+    var errors = {};
+    var customer = trim(f.customer), poNumber = trim(f.poNumber);
+    if (!customer) errors.customer = 'Customer name is required';
+    if (!poNumber) errors.poNumber = 'PO number is required';
+    var poDate = trim(f.poDate), delivery = trim(f.deliveryDate), dueDate = trim(f.paymentDueDate);
+    if (poDate && !isDateStr(poDate)) errors.poDate = 'Enter a valid date';
+    if (delivery && !isDateStr(delivery)) errors.deliveryDate = 'Enter a valid date';
+    if (dueDate && !isDateStr(dueDate)) errors.paymentDueDate = 'Enter a valid date';
+    if (!errors.poDate && !errors.deliveryDate && poDate && delivery && delivery < poDate) errors.deliveryDate = 'Delivery date is before the PO date';
+    var vr = parseAmount(f.value, false);
+    if (!vr.ok) errors.value = vr.error;
+    var value = vr.ok && !vr.blank ? roundMoney(vr.value) : null;
+    var status = PO_STATUSES.indexOf(f.status) >= 0 ? f.status : 'PO Received';
+    var payStatus = PAY_STATUSES.indexOf(f.paymentStatus) >= 0 ? f.paymentStatus : 'Not Due';
+    var ap = parseAmount(f.amountPaid, false);
+    if (!errors.value) paymentChecks(payStatus, value, ap, errors);
+    else if (!ap.ok) errors.amountPaid = ap.error;
+    if (customer && poNumber && (o.existing || []).some(function (p) {
+      return p.id !== o.editingId && sameText(p.customer, customer) && sameText(p.poNumber, poNumber);
+    })) errors.poNumber = 'This customer already has a PO with this number';
+    return {
+      ok: Object.keys(errors).length === 0,
+      errors: errors,
+      clean: {
+        customer: customer,
+        poNumber: poNumber,
+        project: trim(f.project),
+        quotationId: trim(f.quotationId),
+        quotationNumber: trim(f.quotationNumber),
+        poDate: poDate,
+        deliveryDate: delivery,
+        value: value,
+        currency: isCurrency(f.currency) ? f.currency : (o.defaultCurrency || 'INR'),
+        status: status,
+        paymentStatus: payStatus,
+        amountPaid: errors.amountPaid || errors.value ? null : cleanPaid(payStatus, value, ap),
+        paymentDueDate: dueDate,
+        paymentRemarks: trim(f.paymentRemarks),
+        remarks: trim(f.remarks)
+      }
+    };
+  }
+
+  function validatePayment(f, po) {
+    var errors = {};
+    var payStatus = PAY_STATUSES.indexOf(f.paymentStatus) >= 0 ? f.paymentStatus : po.paymentStatus;
+    var dueDate = trim(f.paymentDueDate);
+    if (dueDate && !isDateStr(dueDate)) errors.paymentDueDate = 'Enter a valid date';
+    var ap = parseAmount(f.amountPaid, false);
+    paymentChecks(payStatus, po.value, ap, errors);
+    return {
+      ok: Object.keys(errors).length === 0,
+      errors: errors,
+      clean: {
+        paymentStatus: payStatus,
+        amountPaid: errors.amountPaid ? null : cleanPaid(payStatus, po.value, ap),
+        paymentDueDate: dueDate,
+        paymentRemarks: trim(f.paymentRemarks)
+      }
+    };
+  }
+
+  function poFromQuote(q) {
+    return {
+      customer: q.customer,
+      project: q.project,
+      quotationId: q.id,
+      quotationNumber: q.number,
+      value: q.quotedAmount,
+      currency: q.currency
+    };
+  }
+
+  /* ---------- search, filter, sort ---------- */
+  function hay(parts) { return parts.map(function (p) { return str(p).toLowerCase(); }).join('\n'); }
+  function matchesQuoteSearch(q, text) {
+    text = trim(text).toLowerCase();
+    if (!text) return true;
+    return hay([q.number, q.customer, q.project]).indexOf(text) >= 0;
+  }
+  function matchesPOSearch(po, text) {
+    text = trim(text).toLowerCase();
+    if (!text) return true;
+    return hay([po.customer, po.poNumber, po.project, po.status, po.paymentStatus]).indexOf(text) >= 0;
+  }
+  function matchesFilter(po, f, today) {
+    switch (f) {
+      case 'active': return po.status !== 'Completed';
+      case 'completed': return po.status === 'Completed';
+      case 'paymentDue': return po.paymentStatus === 'Due' || po.paymentStatus === 'Partially Paid';
+      case 'paid': return po.paymentStatus === 'Paid';
+      case 'overdue': return isOverdue(po, today);
+      case 'followup': return po.paymentStatus === 'Due' || po.paymentStatus === 'Partially Paid' || (po.status === 'Completed' && po.paymentStatus !== 'Paid');
+      default: return true;
+    }
+  }
+  function sortPOs(list, key) {
+    var out = list.slice();
+    function byDesc(a, b) { return a < b ? 1 : a > b ? -1 : 0; }
+    if (key === 'delivery') {
+      out.sort(function (a, b) {
+        if (!a.deliveryDate && !b.deliveryDate) return 0;
+        if (!a.deliveryDate) return 1;
+        if (!b.deliveryDate) return -1;
+        return a.deliveryDate < b.deliveryDate ? -1 : a.deliveryDate > b.deliveryDate ? 1 : 0;
+      });
+    } else if (key === 'updated') {
+      out.sort(function (a, b) { return byDesc(a.updatedAt, b.updatedAt); });
+    } else {
+      out.sort(function (a, b) { return byDesc(a.poDate + '|' + a.createdAt, b.poDate + '|' + b.createdAt); });
+    }
+    return out;
+  }
+  function sortQuotes(list) {
+    return list.slice().sort(function (a, b) { return a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0; });
+  }
+
+  /* ---------- export and backup ---------- */
+  function csvCell(v) {
+    if (v === null || v === undefined) return '';
+    if (typeof v === 'number') return String(v);
+    var s = String(v);
+    if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;
+    if (/[",\n\r]/.test(s)) s = '"' + s.replace(/"/g, '""') + '"';
+    return s;
+  }
+  function toCSV(columns, rows) {
+    var out = [columns.map(csvCell).join(',')];
+    rows.forEach(function (r) { out.push(r.map(csvCell).join(',')); });
+    return '﻿' + out.join('\r\n') + '\r\n';
+  }
+  function quotesCSV(quotes) {
+    var cols = ['Quotation Number', 'Customer', 'Project Title', 'Date', 'Currency']
+      .concat(PARAMS.map(function (p) { return p[1]; }))
+      .concat(['Total Cost', 'Quoted Amount', 'Difference', 'Remarks', 'Linked Reference', 'Created', 'Last Updated']);
+    var rows = sortQuotes(quotes).map(function (q) {
+      var total = totalCost(q.costs);
+      return [q.number, q.customer, q.project, q.date, q.currency]
+        .concat(PARAMS.map(function (p) { return q.costs[p[0]]; }))
+        .concat([total, q.quotedAmount, quoteDifference(q.quotedAmount, total), q.remarks, q.linkedRef, q.createdAt, q.updatedAt]);
+    });
+    return toCSV(cols, rows);
+  }
+  function posCSV(pos) {
+    var cols = ['Customer', 'PO Number', 'Project', 'Linked Quotation', 'PO Date', 'Expected Delivery', 'Currency', 'Project Value',
+      'Status', 'Payment Status', 'Amount Paid', 'Outstanding', 'Payment Due Date', 'Payment Remarks', 'Remarks', 'Created', 'Last Updated', 'Last Status Update'];
+    var rows = sortPOs(pos, 'poDate').map(function (p) {
+      return [p.customer, p.poNumber, p.project, p.quotationNumber, p.poDate, p.deliveryDate, p.currency, p.value,
+        p.status, p.paymentStatus, p.amountPaid, outstanding(p), p.paymentDueDate, p.paymentRemarks, p.remarks, p.createdAt, p.updatedAt, p.statusUpdatedAt];
+    });
+    return toCSV(cols, rows);
+  }
+  function makeBackup(quotes, pos, settings, now) {
+    return {
+      app: 'manufacturing-business-manager',
+      schema: 1,
+      exportedAt: now.toISOString(),
+      settings: clone(settings),
+      quotations: clone(quotes),
+      purchaseOrders: clone(pos)
+    };
+  }
+  function validateBackup(obj) {
+    if (!obj || typeof obj !== 'object' || obj.app !== 'manufacturing-business-manager') return { ok: false, error: 'This file is not a Manufacturing Business Manager backup.' };
+    if (!Array.isArray(obj.quotations) || !Array.isArray(obj.purchaseOrders)) return { ok: false, error: 'The backup is missing its quotation or purchase order list.' };
+    var qs = [], ps = [], skipped = 0;
+    obj.quotations.forEach(function (r) { var n = normQuote(r); if (n) qs.push(n); else skipped++; });
+    obj.purchaseOrders.forEach(function (r) { var n = normPO(r); if (n) ps.push(n); else skipped++; });
+    return { ok: true, quotations: qs, pos: ps, skipped: skipped, settings: normSettings(obj.settings) };
+  }
+
+  var api = {
+    PARAMS: PARAMS, PO_STATUSES: PO_STATUSES, PAY_STATUSES: PAY_STATUSES, CURRENCIES: CURRENCIES, DEFAULT_SETTINGS: DEFAULT_SETTINGS,
+    newId: newId, clone: clone, todayLocal: todayLocal, isDateStr: isDateStr, isIso: isIso,
+    parseAmount: parseAmount, toCents: toCents, roundMoney: roundMoney, totalCost: totalCost, quoteDifference: quoteDifference, sumByCurrency: sumByCurrency,
+    numPart: numPart, nextQuoteSeq: nextQuoteSeq, formatQuoteNumber: formatQuoteNumber,
+    normSettings: normSettings, normQuote: normQuote, normPO: normPO,
+    outstanding: outstanding, isOverdue: isOverdue,
+    computeReminder: computeReminder, reminderOf: reminderOf, isReminderDue: isReminderDue, snoozeReminder: snoozeReminder,
+    applyStatus: applyStatus, applyPayment: applyPayment,
+    validateQuote: validateQuote, validatePO: validatePO, validatePayment: validatePayment, poFromQuote: poFromQuote,
+    matchesQuoteSearch: matchesQuoteSearch, matchesPOSearch: matchesPOSearch, matchesFilter: matchesFilter, sortPOs: sortPOs, sortQuotes: sortQuotes,
+    csvCell: csvCell, toCSV: toCSV, quotesCSV: quotesCSV, posCSV: posCSV, makeBackup: makeBackup, validateBackup: validateBackup
+  };
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else root.MBM = api;
+})(typeof window !== 'undefined' ? window : globalThis);
+
+/* Manufacturing Business Manager: screens, storage and actions. Pure calculations live in logic.js (window.MBM). */
+(function () {
+  'use strict';
+  var L = window.MBM;
+  var APP_VERSION = '1.4.0 (Windows)';
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var ENT = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+  function esc(s) { return String(s === null || s === undefined ? '' : s).replace(/[&<>"']/g, function (c) { return ENT[c]; }); }
+  var app = $('#app');
+
+  var S = {
+    quotes: [], pos: [],
+    settings: Object.assign({}, L.DEFAULT_SETTINGS),
+    view: { name: 'dashboard', p: {} }, stack: [], busy: false, loadError: '',
+    poUI: { q: '', filter: 'all', sort: 'poDate' },
+    quoteUI: { q: '' }
+  };
+
+  /* ================= storage ================= */
+  var Store = {
+    mode: 'local', persistent: true, db: null, uid: null,
+    mem: { quotations: new Map(), pos: new Map(), settings: null },
+    init: async function () {
+      // Android package is intentionally local-only: never connect to a cloud store.
+      if (this.mode === 'local') {
+        try { localStorage.setItem('mbm:probe', '1'); localStorage.removeItem('mbm:probe'); } catch (e) { this.persistent = false; }
+      }
+    },
+    col: function (kind) { return this.db.doc('data/users/' + this.uid + '/app').collection(kind); },
+    settingsDoc: function () { return this.db.doc('data/users/' + this.uid + '/settings'); },
+    prefix: function (kind) { return kind === 'quotations' ? 'mbm:q:' : 'mbm:p:'; },
+    loadAll: async function () {
+      if (this.mode === 'cloud') {
+        var r = await Promise.all([this.col('quotations').limit(1000).get(), this.col('pos').limit(1000).get(), this.settingsDoc().get()]);
+        return {
+          quotes: r[0].docs.map(function (d) { return d.data(); }),
+          pos: r[1].docs.map(function (d) { return d.data(); }),
+          settings: r[2].exists ? r[2].data() : null
+        };
+      }
+      if (!this.persistent) {
+        return { quotes: Array.from(this.mem.quotations.values()), pos: Array.from(this.mem.pos.values()), settings: this.mem.settings };
+      }
+      var quotes = [], pos = [], settings = null;
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        try {
+          if (k.indexOf('mbm:q:') === 0) quotes.push(JSON.parse(localStorage.getItem(k)));
+          else if (k.indexOf('mbm:p:') === 0) pos.push(JSON.parse(localStorage.getItem(k)));
+          else if (k === 'mbm:settings') settings = JSON.parse(localStorage.getItem(k));
+        } catch (e) { /* skip a damaged record, keep the rest */ }
+      }
+      return { quotes: quotes, pos: pos, settings: settings };
+    },
+    save: async function (kind, rec) {
+      var body = JSON.parse(JSON.stringify(rec));
+      if (this.mode === 'cloud') { await this.col(kind).doc(rec.id).set(body); return; }
+      if (!this.persistent) { this.mem[kind].set(rec.id, body); return; }
+      localStorage.setItem(this.prefix(kind) + rec.id, JSON.stringify(body));
+      localStorage.removeItem('mbm:del:' + (kind === 'quotations' ? 'q:' : 'p:') + rec.id); // record exists again
+    },
+    remove: async function (kind, id, deletedAt) {
+      if (this.mode === 'cloud') { await this.col(kind).doc(id).delete(); return; }
+      if (!this.persistent) { this.mem[kind].delete(id); return; }
+      localStorage.removeItem(this.prefix(kind) + id);
+      // remember the deletion so phone sync does not bring the record back
+      localStorage.setItem('mbm:del:' + (kind === 'quotations' ? 'q:' : 'p:') + id, deletedAt || new Date().toISOString());
+    },
+    saveSettings: async function (s, changedAt) {
+      var body = JSON.parse(JSON.stringify(s));
+      if (this.mode === 'cloud') { await this.settingsDoc().set(body); return; }
+      if (!this.persistent) { this.mem.settings = body; return; }
+      localStorage.setItem('mbm:settings', JSON.stringify(body));
+      localStorage.setItem('mbm:settingsAt', changedAt || new Date().toISOString());
+    }
+  };
+
+  // Tell the Android notification bridge to rebuild its local schedule after data changes.
+  function notifyNativeDataChanged() { try { window.dispatchEvent(new Event('mbm-data-changed')); } catch (e) {} }
+  ['save', 'remove', 'saveSettings'].forEach(function (method) {
+    var original = Store[method];
+    Store[method] = async function () {
+      var result = await original.apply(this, arguments);
+      notifyNativeDataChanged();
+      return result;
+    };
+  });
+
+  async function reload() {
+    var d = await Store.loadAll();
+    S.quotes = (d.quotes || []).map(function (r) { return L.normQuote(r); }).filter(Boolean);
+    S.pos = (d.pos || []).map(function (r) { return L.normPO(r); }).filter(Boolean);
+    S.settings = L.normSettings(d.settings);
+    S.settings.quoteCounter = Math.max(S.settings.quoteCounter, L.nextQuoteSeq(S.quotes, 0) - 1);
+  }
+  function upsert(arr, rec) {
+    var i = arr.findIndex(function (x) { return x.id === rec.id; });
+    if (i >= 0) arr[i] = rec; else arr.push(rec);
+  }
+  function errMsg(e) { return (e && (e.message || e.code)) ? String(e.message || e.code) : 'Unknown error'; }
+  function findQuote(id) { return S.quotes.find(function (q) { return q.id === id; }); }
+  function findPO(id) { return S.pos.find(function (p) { return p.id === id; }); }
+
+  /* ================= formatting ================= */
+  function money(n, cur) {
+    if (n === null || n === undefined || !isFinite(n)) return '—';
+    cur = cur || S.settings.currency;
+    try {
+      return new Intl.NumberFormat(cur === 'INR' ? 'en-IN' : 'en-US', { style: 'currency', currency: cur, minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
+    } catch (e) { return cur + ' ' + Number(n).toFixed(2); }
+  }
+  function fmtDay(v) {
+    if (!v) return '—';
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v), d;
+    if (m) d = new Date(+m[1], +m[2] - 1, +m[3]); else d = new Date(v);
+    if (isNaN(d)) return '—';
+    return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+  }
+  function fmtDT(iso) {
+    var d = new Date(iso);
+    if (!iso || isNaN(d)) return '—';
+    return d.toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  }
+  function moneyLines(by) {
+    var keys = Object.keys(by);
+    if (!keys.length) return '<div class="v-money">' + esc(money(0)) + '</div>';
+    return keys.sort().map(function (c) { return '<div class="v-money">' + esc(money(by[c], c)) + '</div>'; }).join('') +
+      (keys.length > 1 ? '<div class="s">Currencies are kept separate.</div>' : '');
+  }
+  function stCls(s) { return s === 'Completed' ? 'b-good' : s === 'PO Received' ? '' : 'b-info'; }
+  function payCls(s) { return s === 'Paid' ? 'b-good' : s === 'Due' ? 'b-bad' : s === 'Partially Paid' ? 'b-warn' : ''; }
+  function plural(n, w) { return n + ' ' + w + (n === 1 ? '' : 's'); }
+
+  /* ================= toasts and dialogs ================= */
+  function toast(msg, kind, action) {
+    var el = document.createElement('div');
+    el.className = 'toast' + (kind === 'err' ? ' err' : '');
+    el.setAttribute('role', kind === 'err' ? 'alert' : 'status');
+    var sp = document.createElement('span'); sp.textContent = msg; el.appendChild(sp);
+    if (action) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'btn'; b.textContent = action.label;
+      b.addEventListener('click', function () { el.remove(); action.run(); });
+      el.appendChild(b);
+    }
+    $('#toasts').appendChild(el);
+    setTimeout(function () { el.remove(); }, kind === 'err' || action ? 8000 : 4500);
+  }
+
+  function dialog(o) {
+    return new Promise(function (resolve) {
+      var root = $('#modal-root');
+      var prev = document.activeElement;
+      root.innerHTML = '<div class="modal-back" data-back="1"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="dlg-title">' +
+        '<h2 id="dlg-title">' + esc(o.title) + '</h2><div>' + (o.html || '') + '</div>' +
+        '<div class="btn-row">' + o.actions.map(function (a, i) {
+          return '<button type="button" class="btn ' + (a.cls || '') + '" data-i="' + i + '">' + esc(a.label) + '</button>';
+        }).join('') + '</div></div></div>';
+      function done(v) {
+        document.removeEventListener('keydown', onKey, true);
+        S.modalClose = null;
+        root.innerHTML = '';
+        if (prev && prev.focus) { try { prev.focus(); } catch (e) { /* ignore */ } }
+        resolve(v);
+      }
+      function onKey(e) { if (e.key === 'Escape') { e.preventDefault(); done(undefined); } }
+      document.addEventListener('keydown', onKey, true);
+      S.modalClose = function () { done(undefined); };
+      $('.modal-back', root).addEventListener('click', function (e) { if (e.target.getAttribute('data-back')) done(undefined); });
+      $$('[data-i]', root).forEach(function (b) {
+        b.addEventListener('click', function () {
+          var a = o.actions[+b.getAttribute('data-i')];
+          if (a.keep) { if (a.onClick) a.onClick(root); return; }
+          done(a.value);
+        });
+      });
+      var first = $('[data-i]', root); if (first) first.focus();
+    });
+  }
+  async function confirmDialog(title, html, okLabel, danger) {
+    var r = await dialog({
+      title: title, html: html,
+      actions: [{ label: 'Cancel', value: false, cls: 'btn-secondary' }, { label: okLabel, value: true, cls: danger ? 'btn-danger-solid' : '' }]
+    });
+    return r === true;
+  }
+
+  /* ================= small data helpers ================= */
+  function customerNames() {
+    var seen = {}, out = [];
+    S.quotes.concat(S.pos).forEach(function (r) {
+      var n = (r.customer || '').trim(), k = n.toLowerCase();
+      if (n && !seen[k]) { seen[k] = 1; out.push(n); }
+    });
+    return out.sort(function (a, b) { return a.localeCompare(b); });
+  }
+  function customerList() { return '<datalist id="dl-customers">' + customerNames().map(function (n) { return '<option value="' + esc(n) + '"></option>'; }).join('') + '</datalist>'; }
+  function currencyOptions(sel) {
+    var list = L.CURRENCIES.indexOf(sel) >= 0 ? L.CURRENCIES : L.CURRENCIES.concat([sel]);
+    return list.map(function (c) { return '<option value="' + esc(c) + '"' + (c === sel ? ' selected' : '') + '>' + esc(c) + '</option>'; }).join('');
+  }
+  function stats() {
+    var q = S.quotes, p = S.pos;
+    var pending = p.filter(function (x) { return x.paymentStatus === 'Due' || x.paymentStatus === 'Partially Paid'; });
+    return {
+      nq: q.length, np: p.length,
+      na: p.filter(function (x) { return x.status !== 'Completed'; }).length,
+      nc: p.filter(function (x) { return x.status === 'Completed'; }).length,
+      npend: pending.length,
+      quotedBy: L.sumByCurrency(q, function (x) { return x.quotedAmount; }),
+      poBy: L.sumByCurrency(p, function (x) { return x.value; }),
+      outBy: L.sumByCurrency(pending, function (x) { return L.outstanding(x); })
+    };
+  }
+  function dueReminders() {
+    var now = new Date();
+    return S.pos.filter(function (p) { return L.isReminderDue(p, now, S.settings); })
+      .sort(function (a, b) { return L.reminderOf(a, S.settings).dueAt < L.reminderOf(b, S.settings).dueAt ? -1 : 1; });
+  }
+  function setBusy(on) { S.busy = on; $$('[data-save]').forEach(function (b) { b.disabled = on; }); }
+
+  /* ================= calendar date picker ================= */
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+  function openCalendar(input) {
+    var cur = /^\d{4}-\d{2}-\d{2}$/.test(input.value) ? input.value : '';
+    var t = new Date(), todayIso = t.getFullYear() + '-' + pad2(t.getMonth() + 1) + '-' + pad2(t.getDate());
+    var base = cur || todayIso;
+    var yr = +base.slice(0, 4), mo = +base.slice(5, 7) - 1, picked;
+    function grid() {
+      var first = new Date(yr, mo, 1).getDay(), days = new Date(yr, mo + 1, 0).getDate();
+      var h = '<div class="cal"><div class="cal-head"><button type="button" class="cal-nav" data-cal="-1" aria-label="Previous month">‹</button>' +
+        '<strong>' + MONTHS[mo] + ' ' + yr + '</strong><button type="button" class="cal-nav" data-cal="1" aria-label="Next month">›</button></div><div class="cal-grid">' +
+        ['Su','Mo','Tu','We','Th','Fr','Sa'].map(function (d) { return '<div class="cal-dow">' + d + '</div>'; }).join('');
+      for (var i = 0; i < first; i++) h += '<div class="cal-blank"></div>';
+      for (var d = 1; d <= days; d++) {
+        var iso = yr + '-' + pad2(mo + 1) + '-' + pad2(d);
+        h += '<button type="button" class="cal-day' + (iso === todayIso ? ' today' : '') + (iso === cur ? ' sel' : '') + '" data-day="' + iso + '">' + d + '</button>';
+      }
+      return h + '</div></div>';
+    }
+    var p = dialog({ title: 'Select date', html: '<div id="cal-box">' + grid() + '</div>',
+      actions: [{ label: 'Cancel', cls: 'btn-secondary', value: 'cancel' }, { label: 'Today', cls: 'btn-secondary', value: 'today' }, { label: 'Clear', cls: 'btn-secondary', value: 'clear' }] });
+    var box = $('#cal-box');
+    function close() { var b = $('#modal-root [data-i="0"]'); if (b) b.click(); }
+    box.addEventListener('click', function (e) {
+      var nav = e.target.closest('[data-cal]'), day = e.target.closest('[data-day]');
+      if (nav) { mo += +nav.getAttribute('data-cal'); if (mo < 0) { mo = 11; yr--; } if (mo > 11) { mo = 0; yr++; } box.innerHTML = grid(); }
+      else if (day) { picked = day.getAttribute('data-day'); close(); }
+    });
+    p.then(function (v) {
+      var val = picked || (v === 'today' ? todayIso : v === 'clear' ? '' : null);
+      if (val === null) return;
+      input.value = val;
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+  }
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest && e.target.closest('input.date-input');
+    if (el && !el.disabled) { e.preventDefault(); openCalendar(el); }
+  });
+
+  /* ================= PIN lock for "All Purchase Orders" and "Saved Quotations" ================= */
+  var PIN_KEY = 'mbm:pin';
+  function pinRec() { try { return JSON.parse(localStorage.getItem(PIN_KEY)) || null; } catch (e) { return null; } }
+  function hasPin() { var r = pinRec(); return !!(r && r.hash); }
+  async function pinHash(pin, salt) {
+    var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(salt + ':' + pin));
+    return Array.prototype.map.call(new Uint8Array(buf), function (b) { return (b < 16 ? '0' : '') + b.toString(16); }).join('');
+  }
+  async function pinSave(pin) {
+    var salt = Array.prototype.map.call(crypto.getRandomValues(new Uint8Array(8)), function (b) { return (b < 16 ? '0' : '') + b.toString(16); }).join('');
+    localStorage.setItem(PIN_KEY, JSON.stringify({ salt: salt, hash: await pinHash(pin, salt) }));
+  }
+  async function pinCheck(pin) { var r = pinRec(); return !!r && (await pinHash(pin, r.salt)) === r.hash; }
+  function askPin(title, msg) {
+    var val = '';
+    var p = dialog({ title: title, html: '<p class="muted">' + esc(msg) + '</p><input id="pin-in" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="off" placeholder="PIN" style="text-align:center;letter-spacing:0.4em;font-size:22px">',
+      actions: [{ label: 'Cancel', cls: 'btn-secondary', value: null }, { label: 'OK', value: 'ok' }] });
+    var inp = $('#pin-in');
+    if (inp) {
+      inp.addEventListener('input', function () { inp.value = inp.value.replace(/\D/g, '').slice(0, 6); val = inp.value; });
+      inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); var ok = $('#modal-root [data-i="1"]'); if (ok) ok.click(); } });
+      inp.focus();
+    }
+    return p.then(function (v) { return v === 'ok' ? val : null; });
+  }
+  async function verifyPin(title) {
+    var msg = 'Enter your PIN to continue.';
+    for (;;) {
+      var v = await askPin(title, msg);
+      if (v === null) return false;
+      if (await pinCheck(v)) return true;
+      msg = 'Wrong PIN. Try again.';
+    }
+  }
+  async function askNewPin(title) {
+    var msg = 'Choose a PIN of 4 to 6 digits.';
+    for (;;) {
+      var a = await askPin(title, msg);
+      if (a === null) return null;
+      if (!/^\d{4,6}$/.test(a)) { msg = 'The PIN must be 4 to 6 digits.'; continue; }
+      var b = await askPin(title, 'Enter the same PIN again to confirm.');
+      if (b === null) return null;
+      if (a === b) return a;
+      msg = 'The two PINs did not match. Choose a PIN again.';
+    }
+  }
+  function needsPin(name, p) { return name === 'quoteList' || (name === 'poList' && !(p && p.preset)) || name === 'empList' || name === 'empForm' || name === 'attSheet' || name === 'attPayroll'; }
+  document.addEventListener('visibilitychange', function () { if (document.hidden) S.unlocked = false; });
+
+  /* ================= navigation ================= */
+  var TITLES = { dashboard: 'Dashboard', quoteList: 'Saved Quotations', quoteDetail: 'Quotation Details', poDetail: 'PO Details', poStatus: 'Update PO Status', poPayment: 'Update Payment', reminders: 'Reminders', settings: 'Settings and Data Backup' };
+  function poListTitle(p) { return p.preset === 'active' ? 'Active Projects' : p.preset === 'completed' ? 'Completed Projects' : p.preset === 'followup' ? 'Payment Follow-up' : 'All Purchase Orders'; }
+  function viewTitle(v) {
+    if (v.name === 'quoteForm') return v.p.id ? 'Edit Quotation' : 'Add Quotation';
+    if (v.name === 'poForm') return v.p.id ? 'Edit Purchase Order' : 'Add Purchase Order';
+    if (v.name === 'poList') return poListTitle(v.p);
+    return TITLES[v.name] || 'Back';
+  }
+  /* Phone back button: every in-app screen change adds a browser-history entry, so Android's
+     back button (which walks the WebView history) returns to the previous screen. */
+  var skipPop = 0;
+  function histBack(n) { skipPop++; try { history.go(-n); } catch (e) { skipPop--; } }
+  function go(name, p, opts) {
+    opts = opts || {};
+    if (needsPin(name, p) && hasPin() && !S.unlocked) {
+      verifyPin(name === 'quoteList' ? 'Saved Quotations' : name === 'poList' ? 'All Purchase Orders' : 'Employee and salary details').then(function (ok) {
+        if (ok) { S.unlocked = true; go(name, p, opts); }
+      });
+      return;
+    }
+    if (name === 'dashboard') S.unlocked = false;
+    if (name === 'dashboard') {
+      var n = S.stack.length;
+      S.stack = [];
+      if (n > 0) histBack(n);
+    } else if (!opts.replace) {
+      S.stack.push(S.view);
+      try { history.pushState({ mbm: S.stack.length }, ''); } catch (e) { /* ignore */ }
+    }
+    S.view = { name: name, p: p || {} };
+    render();
+    window.scrollTo(0, 0);
+  }
+  function popView() {
+    var prev = S.stack.pop();
+    S.view = prev || { name: 'dashboard', p: {} };
+    if (S.view.name === 'dashboard') S.unlocked = false;
+    render();
+    window.scrollTo(0, 0);
+  }
+  function back() {
+    if (!S.stack.length) { popView(); return; }
+    popView();
+    histBack(1);
+  }
+  window.addEventListener('popstate', function () {
+    if (skipPop > 0) { skipPop--; return; }
+    if (S.modalClose) {   // back button closes an open dialog; put back the history entry it just used up
+      S.modalClose();
+      try { history.pushState({ mbm: S.stack.length }, ''); } catch (e) { /* ignore */ }
+      return;
+    }
+    if (S.stack.length) popView();
+    else if (S.view.name === 'dashboard') toast('Press back again to exit.');
+  });
+  function shell(title, body, o) {
+    o = o || {};
+    var prev = S.stack[S.stack.length - 1];
+    var showBack = S.stack.length > 1 && prev;
+    return '<header class="bar"><div class="bar-in">' +
+      '<button type="button" class="btn btn-ghost btn-sm" data-act="home">‹ Dashboard</button><span class="spacer"></span>' +
+      (showBack ? '<button type="button" class="btn btn-secondary btn-sm" data-act="back">‹ ' + esc(viewTitle(prev)) + '</button>' : '') +
+      '<img class="brand-logo logo-on-dark" src="./logo.png" alt="Spark Tech Automation"><img class="brand-logo logo-on-light" src="./logo-dark.png" alt=""></div></header><main class="wrap"><div><h1 class="page-title">' + esc(title) + '</h1>' +
+      (o.sub ? '<p class="page-sub">' + o.sub + '</p>' : '') + '</div>' + body + '</main>';
+  }
+  function notFound(what) {
+    return '<div class="empty"><strong>That ' + esc(what) + ' no longer exists</strong><p>It may have been deleted.</p>' +
+      '<button type="button" class="btn" data-act="home">Go to dashboard</button></div>';
+  }
+
+  /* ================= screens ================= */
+  var SCREENS = {}, AFTER = {};
+
+  function render() {
+    var v = S.view, fn = SCREENS[v.name];
+    app.innerHTML = fn ? fn(v.p) : shell('Not found', notFound('screen'));
+    if (AFTER[v.name]) AFTER[v.name](v.p);
+  }
+
+  /* ---------- dashboard ---------- */
+  SCREENS.dashboard = function () {
+    var st = stats(), due = dueReminders(), now = new Date();
+    var dueActive = due.filter(function (p) { return L.reminderOf(p, S.settings).kind === 'active'; }).length;
+    var duePay = due.length - dueActive;
+    var where = Store.mode === 'cloud'
+      ? 'Your records are saved to your account and follow you to any device.'
+      : Store.persistent ? 'Your records are saved on this computer only. A safety copy is kept in Documents automatically; you can also export a backup in Settings.' : '';
+    var warn = '';
+    if (S.loadError) warn += '<div class="note warn" role="alert"><b>Saved records could not be loaded.</b> ' + esc(S.loadError) + ' <button type="button" class="btn btn-secondary btn-sm" data-act="retryLoad">Try again</button></div>';
+    if (Store.mode === 'local' && !Store.persistent) warn += '<div class="note warn" role="alert"><b>This view cannot keep your data.</b> Anything you enter is lost when you close the page. Use Settings to download a backup before leaving.</div>';
+    var alert = '';
+    if (due.length) {
+      alert = '<section class="alert" aria-label="Reminders due"><strong>' + plural(due.length, 'reminder') + ' due</strong>' +
+        due.slice(0, 3).map(function (p) {
+          var r = L.reminderOf(p, S.settings);
+          return '<div class="alert-row"><span>' + esc(p.customer) + ' · PO ' + esc(p.poNumber) + ' · ' + (r.kind === 'payment' ? 'payment follow-up' : 'status check') + '</span>' +
+            '<button type="button" class="btn btn-sm" data-act="reminderOpen" data-id="' + esc(p.id) + '">' + (r.kind === 'payment' ? 'Update payment' : 'Update status') + '</button></div>';
+        }).join('') +
+        (due.length > 3 ? '<div><button type="button" class="btn btn-secondary btn-sm" data-act="go" data-to="reminders">See all ' + due.length + ' reminders</button></div>' : '') + '</section>';
+    }
+    var counts =
+      '<div class="stat"><span class="k">Total quotations</span><span class="v">' + st.nq + '</span></div>' +
+      '<div class="stat"><span class="k">Total purchase orders</span><span class="v">' + st.np + '</span></div>' +
+      '<div class="stat"><span class="k">Active projects</span><span class="v">' + st.na + '</span></div>' +
+      '<div class="stat"><span class="k">Completed projects</span><span class="v">' + st.nc + '</span></div>';
+    var values =
+      '<div class="stat"><span class="k">Payments pending</span><span class="v">' + st.npend + '</span><span class="s">POs marked Due or Partially Paid</span>' +
+      (Object.keys(st.outBy).length ? '<div class="s">Outstanding</div>' + moneyLines(st.outBy) : '') + '</div>' +
+      '<div class="stat"><span class="k">Total quoted value</span>' + moneyLines(st.quotedBy) + '</div>' +
+      '<div class="stat"><span class="k">Total purchase order value</span>' + moneyLines(st.poBy) + '</div>';
+    function tile(label, desc, act, extra, cls) {
+      return '<button type="button" class="tile ' + (cls || '') + '" data-act="' + act + '"' + (extra || '') + '><span class="tile-top"><strong>' + esc(label) + '</strong></span><span>' + esc(desc) + '</span></button>';
+    }
+    function tileBadge(label, desc, act, extra, n) {
+      return '<button type="button" class="tile" data-act="' + act + '"' + extra + '><span class="tile-top"><strong>' + esc(label) + '</strong>' +
+        (n ? '<span class="count-pill">' + n + ' due</span>' : '') + '</span><span>' + esc(desc) + '</span></button>';
+    }
+    return '<main class="wrap bento">' +
+      '<div class="top-logo"><button type="button" class="theme-toggle" data-act="toggleTheme" aria-label="Switch between light and dark theme"><span class="tt-track"><span class="tt-knob"></span></span><span class="tt-label tt-light">Light</span><span class="tt-label tt-dark">Dark</span></button><img class="brand-logo logo-on-dark" src="./logo.png" alt="Spark Tech Automation"><img class="brand-logo logo-on-light" src="./logo-dark.png" alt=""></div><div class="masthead"><h1>Manufacturing Business Manager</h1><p>' + esc(where) + '</p></div>' + warn + alert +
+      '<section><h2 class="sec-title">Summary</h2><div class="cards cards-count">' + counts + '</div><div class="cards" style="margin-top:12px">' + values + '</div></section>' +
+      '<section><h2 class="sec-title">PO reminders</h2><div class="tiles">' +
+      tile('Add Purchase Order', 'Record a new customer PO', 'go', ' data-to="poForm"', 'tile-primary') +
+      tileBadge('Active Projects', 'POs still in progress, with status reminders', 'openPOList', ' data-preset="active"', dueActive) +
+      tileBadge('Payment Follow-up', 'Unpaid and part-paid POs', 'openPOList', ' data-preset="followup"', duePay) +
+      tile('All Purchase Orders', 'Search, filter and update every PO', 'openPOList', ' data-preset=""') +
+      tile('Completed Projects', 'Delivered and commissioned POs', 'openPOList', ' data-preset="completed"') +
+      '</div></section>' +
+      '<section><h2 class="sec-title">Quotations</h2><div class="tiles">' +
+      tile('Add Quotation', 'Cost 21 items and set a quoted amount', 'go', ' data-to="quoteForm"', 'tile-primary') +
+      tile('Saved Quotations', 'Search, edit and turn into a PO', 'go', ' data-to="quoteList"') +
+      '</div></section>' +
+      '<section><h2 class="sec-title">Data</h2><div class="tiles">' +
+      tile('Settings and Data Backup', 'Currency, reminder days, backup and restore', 'go', ' data-to="settings"') +
+      tile('Reminders', due.length ? plural(due.length, 'reminder') + ' due now' : 'Nothing due right now', 'go', ' data-to="reminders"') +
+      '</div></section></main>';
+  };
+
+  /* ---------- quotation form ---------- */
+  SCREENS.quoteForm = function (p) {
+    var editing = p.id ? findQuote(p.id) : null;
+    if (p.id && !editing) return shell('Edit Quotation', notFound('quotation'));
+    var q = editing || { customer: '', project: '', date: L.todayLocal(), remarks: '', linkedRef: '', currency: S.settings.currency, costs: {}, quotedAmount: null };
+    var number = editing ? editing.number : L.formatQuoteNumber(L.nextQuoteSeq(S.quotes, S.settings.quoteCounter));
+    var banner = editing
+      ? '<div class="mode-banner"><span>Editing <b class="mono">' + esc(number) + '</b></span><button type="button" class="btn btn-secondary btn-sm" data-act="newQuote">Start a new quotation</button></div>'
+      : '<div class="mode-banner"><span>New quotation <b class="mono">' + esc(number) + '</b></span><span class="muted">The number is confirmed when you save</span></div>';
+    var linked = editing ? S.pos.filter(function (x) { return x.quotationId === editing.id; }) : [];
+    var rows = L.PARAMS.map(function (pr, i) {
+      var v = q.costs[pr[0]];
+      return '<tr><td class="p"><span class="n">' + (i + 1) + '</span><label for="q-cost-' + pr[0] + '">' + esc(pr[1]) + '</label></td>' +
+        '<td class="a"><input class="cost-input" id="q-cost-' + pr[0] + '" data-key="' + pr[0] + '" type="text" inputmode="decimal" autocomplete="off" placeholder="0" value="' + (v ? esc(v) : '') + '"></td></tr>';
+    }).join('');
+    return shell(editing ? 'Edit Quotation' : 'Add Quotation',
+      banner + customerList() +
+      '<form id="quote-form" novalidate autocomplete="off">' +
+      '<div class="fieldset"><h2>Quotation details</h2><div class="form-grid">' +
+      '<div class="field"><label for="q-number">Quotation number</label><input id="q-number" type="text" value="' + esc(number) + '" readonly></div>' +
+      '<div class="field"><label for="q-customer">Customer name *</label><input id="q-customer" type="text" list="dl-customers" value="' + esc(q.customer) + '"></div>' +
+      '<div class="field"><label for="q-project">Project title *</label><input id="q-project" type="text" value="' + esc(q.project) + '"></div>' +
+      '<div class="field"><label for="q-date">Quotation date</label><input id="q-date" type="text" class="date-input" readonly placeholder="Tap to pick a date" value="' + esc(q.date) + '"></div>' +
+      '<div class="field"><label for="q-currency">Currency</label><select id="q-currency">' + currencyOptions(q.currency) + '</select></div>' +
+      '<div class="field"><label for="q-ref">Linked project or PO reference (optional)</label><input id="q-ref" type="text" value="' + esc(q.linkedRef) + '"></div>' +
+      '<div class="field wide"><label for="q-remarks">Remarks or scope of work (optional)</label><textarea id="q-remarks">' + esc(q.remarks) + '</textarea></div>' +
+      '</div>' +
+      (linked.length ? '<p class="muted">Linked purchase orders: ' + linked.map(function (x) { return 'PO ' + esc(x.poNumber); }).join(', ') + '</p>' : '') +
+      '</div>' +
+      '<div class="fieldset"><h2>Manufacturing cost</h2>' +
+      '<div class="cost-scroll"><table class="cost-table"><thead><tr><th>Parameter</th><th>Amount</th></tr></thead><tbody>' + rows + '</tbody>' +
+      '<tfoot><tr><td>Total Cost</td><td class="mono js-total">' + esc(money(0, q.currency)) + '</td></tr></tfoot></table></div>' +
+      '<div id="q-bad" class="field-err" hidden>Some amounts are not valid numbers. They count as 0 until you fix them.</div>' +
+      '<div class="totals">' +
+      '<div class="total-box"><div class="k">Total Cost</div><div class="v js-total" id="q-total">' + esc(money(0, q.currency)) + '</div><div class="hint muted">Adds all 21 amounts and updates as you type.</div></div>' +
+      '<div class="field"><label for="q-quoted">Quoted Amount</label><input id="q-quoted" type="text" inputmode="decimal" autocomplete="off" placeholder="0" value="' + (q.quotedAmount === null ? '' : esc(q.quotedAmount)) + '">' +
+      '<span class="hint">Enter this yourself. It is never copied from Total Cost.</span>' +
+      '<div class="hint">Difference (quoted minus total cost): <b class="mono" id="q-diff">—</b></div></div>' +
+      '</div></div>' +
+      '<div class="btn-row">' +
+      '<button type="button" class="btn grow-sm" data-act="saveQuote" data-save="1">Save Quotation</button>' +
+      '<button type="button" class="btn btn-secondary grow-sm" data-act="clearQuote">Clear Form</button>' +
+      '<button type="button" class="btn btn-secondary grow-sm" data-act="go" data-to="quoteList">View Quotations</button>' +
+      (editing ? '<button type="button" class="btn btn-secondary grow-sm" data-act="poFromQuote" data-id="' + esc(editing.id) + '">Create PO from Quotation</button>' : '') +
+      '</div>' +
+      (editing ? '' : '<p class="muted">Save the quotation first, then you can create a PO from it.</p>') +
+      '</form>');
+  };
+  AFTER.quoteForm = function () { updateQuoteTotals(); };
+
+  function readQuoteForm() {
+    var costs = {};
+    L.PARAMS.forEach(function (pr) { costs[pr[0]] = $('#q-cost-' + pr[0]).value; });
+    return {
+      customer: $('#q-customer').value, project: $('#q-project').value, date: $('#q-date').value, remarks: $('#q-remarks').value,
+      linkedRef: $('#q-ref').value, currency: $('#q-currency').value, quotedAmount: $('#q-quoted').value, costs: costs
+    };
+  }
+  function updateQuoteTotals() {
+    if (!$('#q-total')) return;
+    var neg = S.settings.allowNegative, costs = {}, bad = false;
+    $$('.cost-input').forEach(function (inp) {
+      var r = L.parseAmount(inp.value, neg);
+      costs[inp.getAttribute('data-key')] = r.ok ? r.value : 0;
+      if (!r.ok) bad = true;
+      inp.setAttribute('aria-invalid', r.ok ? 'false' : 'true');
+    });
+    var cur = $('#q-currency').value, total = L.totalCost(costs), qr = L.parseAmount($('#q-quoted').value, neg);
+    $$('.js-total').forEach(function (el) { el.textContent = money(total, cur); });
+    var diff = $('#q-diff');
+    if (!qr.ok || qr.blank) { diff.textContent = '—'; diff.className = 'mono'; }
+    else {
+      var d = L.quoteDifference(qr.value, total);
+      diff.textContent = (d > 0 ? '+' : '') + money(d, cur);
+      diff.className = 'mono ' + (d > 0 ? 'pos' : d < 0 ? 'neg' : '');
+    }
+    $('#q-quoted').setAttribute('aria-invalid', qr.ok ? 'false' : 'true');
+    $('#q-bad').hidden = !bad;
+  }
+
+  function clearErrors() {
+    $$('.field-err[data-err]').forEach(function (e) { e.remove(); });
+    $$('[aria-invalid="true"]').forEach(function (e) { e.setAttribute('aria-invalid', 'false'); });
+  }
+  function showErrors(errors, prefix) {
+    clearErrors();
+    var first = null;
+    Object.keys(errors).forEach(function (k) {
+      var el = $('#' + prefix + k);
+      if (!el) return;
+      el.setAttribute('aria-invalid', 'true');
+      var msg = document.createElement('div');
+      msg.className = 'field-err'; msg.setAttribute('data-err', '1'); msg.textContent = errors[k];
+      var host = el.closest('td') || el.closest('.field') || el.parentNode;
+      host.appendChild(msg);
+      if (!first) first = el;
+    });
+    if (first) { first.scrollIntoView({ block: 'center', behavior: 'smooth' }); try { first.focus({ preventScroll: true }); } catch (e) { /* ignore */ } }
+  }
+
+  async function saveQuote() {
+    if (S.busy) return;
+    var res = L.validateQuote(readQuoteForm(), { allowNeg: S.settings.allowNegative, defaultCurrency: S.settings.currency });
+    if (!res.ok) { showErrors(res.errors, 'q-'); toast('Check the highlighted fields.', 'err'); return; }
+    clearErrors();
+    setBusy(true);
+    try {
+      var iso = new Date().toISOString(), editingId = S.view.p.id, rec;
+      if (editingId) {
+        var old = findQuote(editingId);
+        if (!old) throw new Error('This quotation no longer exists.');
+        rec = Object.assign({}, old, res.clean, { updatedAt: iso });
+      } else {
+        var seq = L.nextQuoteSeq(S.quotes, S.settings.quoteCounter);
+        S.settings.quoteCounter = seq;
+        await Store.saveSettings(S.settings);
+        rec = Object.assign({ id: L.newId(), number: L.formatQuoteNumber(seq) }, res.clean, { createdAt: iso, updatedAt: iso });
+      }
+      rec.totalCost = L.totalCost(rec.costs);
+      await Store.save('quotations', rec);
+      upsert(S.quotes, rec);
+      go('quoteForm', { id: rec.id }, { replace: true });
+      toast((editingId ? 'Changes saved to ' : 'Saved as ') + rec.number + '.');
+      window.scrollTo(0, 0);
+    } catch (e) {
+      toast('Could not save the quotation: ' + errMsg(e), 'err');
+    } finally { setBusy(false); }
+  }
+  async function clearQuoteForm() {
+    var editing = !!S.view.p.id;
+    var ok = await confirmDialog('Clear the form?',
+      '<p>Everything you have typed on this form will be removed.' + (editing ? ' The saved quotation stays as it is until you tap Save.' : '') + ' Saved quotations are not deleted.</p>', 'Clear form', false);
+    if (!ok) return;
+    $$('#quote-form input[type="text"]:not([readonly]), #quote-form textarea').forEach(function (el) { el.value = ''; });
+    $('#q-date').value = L.todayLocal();
+    clearErrors();
+    updateQuoteTotals();
+    toast('Form cleared.');
+  }
+
+  /* ---------- saved quotations ---------- */
+  function quoteCard(q) {
+    var total = L.totalCost(q.costs), linked = S.pos.filter(function (p) { return p.quotationId === q.id; }).length;
+    return '<article class="item"><div class="item-top"><div><div class="item-title">' + esc(q.customer || '(no customer)') + '</div><div class="item-sub">' + esc(q.project) + '</div></div>' +
+      '<span class="badge mono">' + esc(q.number || '—') + '</span></div>' +
+      '<dl class="facts"><div><dt>Date</dt><dd>' + esc(fmtDay(q.date)) + '</dd></div>' +
+      '<div><dt>Total cost</dt><dd class="mono">' + esc(money(total, q.currency)) + '</dd></div>' +
+      '<div><dt>Quoted amount</dt><dd class="mono">' + (q.quotedAmount === null ? '<span class="muted">Not entered</span>' : esc(money(q.quotedAmount, q.currency))) + '</dd></div>' +
+      (linked ? '<div><dt>Purchase orders</dt><dd>' + linked + ' linked</dd></div>' : '') + '</dl>' +
+      '<div class="actions">' +
+      '<button type="button" class="btn btn-secondary btn-sm" data-act="go" data-to="quoteDetail" data-id="' + esc(q.id) + '">Open Details</button>' +
+      '<button type="button" class="btn btn-secondary btn-sm" data-act="go" data-to="quoteForm" data-id="' + esc(q.id) + '">Edit</button>' +
+      '<button type="button" class="btn btn-secondary btn-sm" data-act="poFromQuote" data-id="' + esc(q.id) + '">Create PO</button>' +
+      '<button type="button" class="btn btn-danger btn-sm" data-act="deleteQuote" data-id="' + esc(q.id) + '">Delete</button></div></article>';
+  }
+  function quoteListHtml() {
+    var all = L.sortQuotes(S.quotes), list = all.filter(function (q) { return L.matchesQuoteSearch(q, S.quoteUI.q); });
+    if (!all.length) return '<div class="empty"><strong>No saved quotations yet</strong><p>Quotations you save appear here, newest first.</p><button type="button" class="btn" data-act="go" data-to="quoteForm">Add Quotation</button></div>';
+    if (!list.length) return '<div class="empty"><strong>No quotations match “' + esc(S.quoteUI.q) + '”</strong><p>Search by quotation number, customer name or project title.</p><button type="button" class="btn btn-secondary" data-act="clearQuoteSearch">Clear search</button></div>';
+    return list.map(quoteCard).join('');
+  }
+  SCREENS.quoteList = function () {
+    return shell('Saved Quotations',
+      '<div class="toolbar"><div class="grow"><label class="sr" for="quote-search" style="position:absolute;left:-9999px">Search quotations</label>' +
+      '<input id="quote-search" type="search" placeholder="Search by number, customer or project" value="' + esc(S.quoteUI.q) + '" autocomplete="off"></div>' +
+      '<button type="button" class="btn" data-act="newQuote">New Quotation</button></div>' +
+      '<div id="quote-list" class="list">' + quoteListHtml() + '</div>',
+      { sub: plural(S.quotes.length, 'quotation') + ' saved. Newest first.' });
+  };
+
+  /* ---------- quotation details ---------- */
+  SCREENS.quoteDetail = function (p) {
+    var q = findQuote(p.id);
+    if (!q) return shell('Quotation Details', notFound('quotation'));
+    var total = L.totalCost(q.costs), diff = L.quoteDifference(q.quotedAmount, total);
+    var linked = S.pos.filter(function (x) { return x.quotationId === q.id; });
+    var rows = L.PARAMS.map(function (pr, i) {
+      return '<tr><td class="p"><span class="n">' + (i + 1) + '</span>' + esc(pr[1]) + '</td><td class="a">' + esc(money(q.costs[pr[0]], q.currency)) + '</td></tr>';
+    }).join('');
+    return shell(q.number + ' · ' + q.customer,
+      '<div class="card"><dl class="detail-grid">' +
+      '<div><dt>Quotation number</dt><dd class="mono">' + esc(q.number) + '</dd></div>' +
+      '<div><dt>Customer</dt><dd>' + esc(q.customer) + '</dd></div>' +
+      '<div><dt>Project title</dt><dd>' + esc(q.project) + '</dd></div>' +
+      '<div><dt>Quotation date</dt><dd>' + esc(fmtDay(q.date)) + '</dd></div>' +
+      '<div><dt>Currency</dt><dd>' + esc(q.currency) + '</dd></div>' +
+      '<div><dt>Linked project or PO reference</dt><dd>' + (q.linkedRef ? esc(q.linkedRef) : '—') + '</dd></div>' +
+      '<div class="wide"><dt>Linked purchase orders</dt><dd>' + (linked.length ? linked.map(function (x) {
+        return '<button type="button" class="btn btn-secondary btn-sm" data-act="go" data-to="poDetail" data-id="' + esc(x.id) + '">PO ' + esc(x.poNumber) + '</button>';
+      }).join(' ') : 'None yet') + '</dd></div>' +
+      '<div class="wide"><dt>Remarks or scope of work</dt><dd>' + (q.remarks ? esc(q.remarks).replace(/\n/g, '<br>') : '—') + '</dd></div></dl></div>' +
+      '<div class="cost-scroll"><table class="cost-table readonly"><thead><tr><th>Parameter</th><th>Amount</th></tr></thead><tbody>' + rows + '</tbody>' +
+      '<tfoot><tr><td>Total Cost</td><td class="mono">' + esc(money(total, q.currency)) + '</td></tr></tfoot></table></div>' +
+      '<div class="totals"><div class="total-box"><div class="k">Total Cost</div><div class="v">' + esc(money(total, q.currency)) + '</div></div>' +
+      '<div class="total-box"><div class="k">Quoted Amount</div><div class="v">' + (q.quotedAmount === null ? '—' : esc(money(q.quotedAmount, q.currency))) + '</div>' +
+      (diff === null ? '' : '<div class="hint">Difference: <b class="mono ' + (diff > 0 ? 'pos' : diff < 0 ? 'neg' : '') + '">' + (diff > 0 ? '+' : '') + esc(money(diff, q.currency)) + '</b></div>') + '</div></div>' +
+      '<p class="muted">Created ' + esc(fmtDT(q.createdAt)) + ' · Last updated ' + esc(fmtDT(q.updatedAt)) + '</p>' +
+      '<div class="btn-row"><button type="button" class="btn" data-act="go" data-to="quoteForm" data-id="' + esc(q.id) + '">Edit</button>' +
+      '<button type="button" class="btn btn-secondary" data-act="poFromQuote" data-id="' + esc(q.id) + '">Create PO</button>' +
+      '<button type="button" class="btn btn-danger" data-act="deleteQuote" data-id="' + esc(q.id) + '">Delete</button>' +
+      '<button type="button" class="btn btn-secondary" data-act="back">Back</button></div>');
+  };
+
+  /* ---------- purchase order form ---------- */
+  SCREENS.poForm = function (p) {
+    var editing = p.id ? findPO(p.id) : null;
+    if (p.id && !editing) return shell('Edit Purchase Order', notFound('purchase order'));
+    var quote = !editing && p.quoteId ? findQuote(p.quoteId) : null;
+    var base = editing || Object.assign({
+      customer: '', poNumber: '', poDate: L.todayLocal(), deliveryDate: '', project: '', value: null, currency: S.settings.currency,
+      status: 'PO Received', paymentStatus: 'Not Due', amountPaid: null, paymentDueDate: '', paymentRemarks: '', remarks: '', quotationId: '', quotationNumber: ''
+    }, quote ? L.poFromQuote(quote) : {});
+    var banner = editing
+      ? '<div class="mode-banner"><span>Editing PO <b class="mono">' + esc(editing.poNumber) + '</b> for ' + esc(editing.customer) + '</span><button type="button" class="btn btn-secondary btn-sm" data-act="newPO">Start a new PO</button></div>'
+      : quote
+        ? '<div class="mode-banner"><span>New PO from quotation <b class="mono">' + esc(quote.number) + '</b></span><span class="muted">Customer, project and value are prefilled. You can change them.</span></div>'
+        : '<div class="mode-banner"><span>New purchase order</span></div>';
+    var quoteOpts = '<option value="">None</option>' + L.sortQuotes(S.quotes).map(function (q) {
+      return '<option value="' + esc(q.id) + '"' + (q.id === base.quotationId ? ' selected' : '') + '>' + esc(q.number + ' · ' + q.customer + ' · ' + q.project) + '</option>';
+    }).join('');
+    if (base.quotationId && !findQuote(base.quotationId)) quoteOpts += '<option value="' + esc(base.quotationId) + '" selected>' + esc((base.quotationNumber || 'Quotation') + ' (deleted)') + '</option>';
+    function opts(list, sel) { return list.map(function (s) { return '<option' + (s === sel ? ' selected' : '') + '>' + esc(s) + '</option>'; }).join(''); }
+    return shell(editing ? 'Edit Purchase Order' : 'Add Purchase Order',
+      banner + customerList() +
+      '<form id="po-form" novalidate autocomplete="off">' +
+      '<div class="fieldset"><h2>Order details</h2><div class="form-grid">' +
+      '<div class="field"><label for="po-customer">Customer name *</label><input id="po-customer" type="text" list="dl-customers" value="' + esc(base.customer) + '"></div>' +
+      '<div class="field"><label for="po-number">PO number *</label><input id="po-number" type="text" value="' + esc(base.poNumber) + '"></div>' +
+      '<div class="field"><label for="po-project">Project title or reference</label><input id="po-project" type="text" value="' + esc(base.project) + '"></div>' +
+      '<div class="field"><label for="po-quote">Linked quotation (optional)</label><select id="po-quote">' + quoteOpts + '</select></div>' +
+      '<div class="field"><label for="po-date">PO date</label><input id="po-date" type="text" class="date-input" readonly placeholder="Tap to pick a date" value="' + esc(base.poDate) + '"></div>' +
+      '<div class="field"><label for="po-delivery">Expected delivery date</label><input id="po-delivery" type="text" class="date-input" readonly placeholder="Tap to pick a date" value="' + esc(base.deliveryDate) + '"></div>' +
+      '<div class="field"><label for="po-value">Project value</label><input id="po-value" type="text" inputmode="decimal" placeholder="0" value="' + (base.value === null ? '' : esc(base.value)) + '"></div>' +
+      '<div class="field"><label for="po-currency">Currency</label><select id="po-currency">' + currencyOptions(base.currency) + '</select></div>' +
+      '<div class="field"><label for="po-status">PO status</label><select id="po-status">' + opts(L.PO_STATUSES, base.status) + '</select></div>' +
+      '<div class="field wide"><label for="po-remarks">Remarks</label><textarea id="po-remarks">' + esc(base.remarks) + '</textarea></div></div></div>' +
+      '<div class="fieldset"><h2>Payment</h2><div class="form-grid">' +
+      '<div class="field"><label for="po-paystatus">Payment status</label><select id="po-paystatus">' + opts(L.PAY_STATUSES, base.paymentStatus) + '</select></div>' +
+      '<div class="field"><label for="po-paid">Amount paid</label><input id="po-paid" type="text" inputmode="decimal" placeholder="0" value="' + (base.amountPaid === null ? '' : esc(base.amountPaid)) + '"></div>' +
+      '<div class="field"><span class="lbl">Outstanding balance</span><div class="mono" id="po-outstanding" style="min-height:48px;display:flex;align-items:center">—</div></div>' +
+      '<div class="field"><label for="po-paydue">Payment due date</label><input id="po-paydue" type="text" class="date-input" readonly placeholder="Tap to pick a date" value="' + esc(base.paymentDueDate) + '"></div>' +
+      '<div class="field wide"><label for="po-payremarks">Payment remarks</label><input id="po-payremarks" type="text" value="' + esc(base.paymentRemarks) + '"></div></div></div>' +
+      '<div class="btn-row"><button type="button" class="btn grow-sm" data-act="savePO" data-save="1">Save Purchase Order</button>' +
+      '<button type="button" class="btn btn-secondary grow-sm" data-act="clearPO">Clear Form</button>' +
+      '<button type="button" class="btn btn-secondary grow-sm" data-act="openPOList" data-preset="">All Purchase Orders</button></div></form>');
+  };
+  AFTER.poForm = function () { updatePOOutstanding(); };
+
+  function updatePOOutstanding() {
+    var el = $('#po-outstanding');
+    if (!el) return;
+    var v = L.parseAmount($('#po-value').value, false), a = L.parseAmount($('#po-paid').value, false);
+    if (!v.ok || v.blank) { el.textContent = '—'; return; }
+    var paid = $('#po-paystatus').value === 'Paid' ? v.value : (a.ok ? a.value : 0);
+    el.textContent = money(Math.max(0, (L.toCents(v.value) - L.toCents(paid)) / 100), $('#po-currency').value);
+  }
+  function readPOForm() {
+    return {
+      customer: $('#po-customer').value, poNumber: $('#po-number').value, project: $('#po-project').value, quotationId: $('#po-quote').value,
+      poDate: $('#po-date').value, deliveryDate: $('#po-delivery').value, value: $('#po-value').value, currency: $('#po-currency').value,
+      status: $('#po-status').value, paymentStatus: $('#po-paystatus').value, amountPaid: $('#po-paid').value,
+      paymentDueDate: $('#po-paydue').value, paymentRemarks: $('#po-payremarks').value, remarks: $('#po-remarks').value
+    };
+  }
+  async function savePO() {
+    if (S.busy) return;
+    var editingId = S.view.p.id, old = editingId ? findPO(editingId) : null;
+    var f = readPOForm();
+    var qrec = f.quotationId ? findQuote(f.quotationId) : null;
+    f.quotationNumber = qrec ? qrec.number : (old && old.quotationId === f.quotationId ? old.quotationNumber : '');
+    var res = L.validatePO(f, { existing: S.pos, editingId: editingId, defaultCurrency: S.settings.currency });
+    if (!res.ok) { mapPOErrors(res.errors); toast('Check the highlighted fields.', 'err'); return; }
+    clearErrors();
+    setBusy(true);
+    try {
+      var now = new Date(), iso = now.toISOString(), rec;
+      if (editingId) {
+        if (!old) throw new Error('This purchase order no longer exists.');
+        rec = Object.assign({}, old, res.clean, { updatedAt: iso });
+        if (old.status !== rec.status) {
+          rec.statusHistory = (old.statusHistory || []).concat([{ from: old.status, to: rec.status, at: iso }]);
+          rec.statusUpdatedAt = iso;
+        }
+        rec.reminder = L.computeReminder(rec, old, now, S.settings);
+      } else {
+        rec = Object.assign({ id: L.newId() }, res.clean, {
+          createdAt: iso, updatedAt: iso, statusUpdatedAt: iso, statusHistory: [{ from: null, to: res.clean.status, at: iso }], reminder: null
+        });
+        rec.reminder = L.computeReminder(rec, null, now, S.settings);
+      }
+      await Store.save('pos', rec);
+      upsert(S.pos, rec);
+      if (editingId) {
+        go('poDetail', { id: rec.id }, { replace: true });
+        toast('Changes saved to PO ' + rec.poNumber + '.');
+      } else {
+        go('poForm', {}, { replace: true });
+        toast('Saved PO ' + rec.poNumber + ' for ' + rec.customer + '.', null, { label: 'View', run: function () { go('poDetail', { id: rec.id }); } });
+      }
+    } catch (e) {
+      toast('Could not save the purchase order: ' + errMsg(e), 'err');
+    } finally { setBusy(false); }
+  }
+  function mapPOErrors(errors) {
+    var map = { customer: 'po-customer', poNumber: 'po-number', poDate: 'po-date', deliveryDate: 'po-delivery', value: 'po-value', amountPaid: 'po-paid', paymentDueDate: 'po-paydue' };
+    clearErrors();
+    var first = null;
+    Object.keys(errors).forEach(function (k) {
+      var el = $('#' + map[k]);
+      if (!el) return;
+      el.setAttribute('aria-invalid', 'true');
+      var msg = document.createElement('div');
+      msg.className = 'field-err'; msg.setAttribute('data-err', '1'); msg.textContent = errors[k];
+      el.closest('.field').appendChild(msg);
+      if (!first) first = el;
+    });
+    if (first) { first.scrollIntoView({ block: 'center', behavior: 'smooth' }); try { first.focus({ preventScroll: true }); } catch (e) { /* ignore */ } }
+  }
+  async function clearPOForm() {
+    var ok = await confirmDialog('Clear the form?', '<p>Everything you have typed on this form will be removed. Saved purchase orders are not deleted.</p>', 'Clear form', false);
+    if (!ok) return;
+    $$('#po-form input[type="text"], #po-form textarea').forEach(function (el) { el.value = ''; });
+    $('#po-date').value = L.todayLocal();
+    $('#po-quote').value = '';
+    $('#po-status').value = 'PO Received';
+    $('#po-paystatus').value = 'Not Due';
+    clearErrors();
+    updatePOOutstanding();
+    toast('Form cleared.');
+  }
+
+  /* ---------- PO list ---------- */
+  var FILTERS = [['all', 'All POs'], ['active', 'Active POs'], ['completed', 'Completed POs'], ['paymentDue', 'Payment Due'], ['paid', 'Paid POs'], ['overdue', 'Overdue Delivery']];
+  function presetFilter(p) { return p.preset === 'active' ? 'active' : p.preset === 'completed' ? 'completed' : p.preset === 'followup' ? 'followup' : S.poUI.filter; }
+  function poCard(po) {
+    var today = L.todayLocal(), od = L.isOverdue(po, today), due = L.isReminderDue(po, new Date(), S.settings), out = L.outstanding(po);
+    var id = esc(po.id);
+    return '<article class="item"><div class="item-top"><div><div class="item-title">' + esc(po.customer) + '</div>' +
+      '<div class="item-sub"><span class="mono">PO ' + esc(po.poNumber) + '</span>' + (po.project ? ' · ' + esc(po.project) : '') + '</div></div>' +
+      '<span class="badge ' + stCls(po.status) + '">' + esc(po.status) + '</span></div>' +
+      '<dl class="facts"><div><dt>PO date</dt><dd>' + esc(fmtDay(po.poDate)) + '</dd></div>' +
+      '<div><dt>Expected delivery</dt><dd>' + esc(fmtDay(po.deliveryDate)) + (od ? ' <span class="tag bad">Overdue</span>' : '') + '</dd></div>' +
+      '<div><dt>Project value</dt><dd class="mono">' + esc(money(po.value, po.currency)) + '</dd></div>' +
+      '<div><dt>Payment</dt><dd><span class="badge ' + payCls(po.paymentStatus) + '">' + esc(po.paymentStatus) + '</span>' +
+      (out !== null && out > 0 && po.paymentStatus !== 'Not Due' ? ' <span class="muted mono">' + esc(money(out, po.currency)) + ' left</span>' : '') + '</dd></div></dl>' +
+      (due ? '<div><span class="tag warn">Reminder due</span></div>' : '') +
+      '<div class="actions">' +
+      '<button type="button" class="btn btn-secondary btn-sm" data-act="go" data-to="poDetail" data-id="' + id + '">View Details</button>' +
+      '<button type="button" class="btn btn-secondary btn-sm" data-act="go" data-to="poStatus" data-id="' + id + '">Update Status</button>' +
+      '<button type="button" class="btn btn-secondary btn-sm" data-act="go" data-to="poPayment" data-id="' + id + '">Update Payment</button>' +
+      '<button type="button" class="btn btn-secondary btn-sm" data-act="go" data-to="poForm" data-id="' + id + '">Edit PO</button>' +
+      '<button type="button" class="btn btn-danger btn-sm" data-act="deletePO" data-id="' + id + '">Delete PO</button></div></article>';
+  }
+  function poListHtml(p) {
+    var f = presetFilter(p), today = L.todayLocal();
+    if (!S.pos.length) return '<div class="empty"><strong>No purchase orders yet</strong><p>Add a PO to start tracking its status, delivery and payment.</p><button type="button" class="btn" data-act="go" data-to="poForm">Add Purchase Order</button></div>';
+    var list = L.sortPOs(S.pos.filter(function (po) { return L.matchesFilter(po, f, today) && L.matchesPOSearch(po, S.poUI.q); }), S.poUI.sort);
+    if (!list.length) return '<div class="empty"><strong>No purchase orders match</strong><p>Try another search or filter.</p>' +
+      (S.poUI.q ? '<button type="button" class="btn btn-secondary" data-act="clearPOSearch">Clear search</button>' : '') + '</div>';
+    return list.map(poCard).join('');
+  }
+  SCREENS.poList = function (p) {
+    var f = presetFilter(p), today = L.todayLocal();
+    var chips = p.preset ? '' : '<div class="chips" role="group" aria-label="Filter purchase orders">' + FILTERS.map(function (x) {
+      var n = S.pos.filter(function (po) { return L.matchesFilter(po, x[0], today); }).length;
+      return '<button type="button" class="chip" data-act="setFilter" data-filter="' + x[0] + '" aria-pressed="' + (f === x[0]) + '">' + esc(x[1]) + ' (' + n + ')</button>';
+    }).join('') + '</div>';
+    var sorts = [['poDate', 'Latest PO date'], ['updated', 'Latest update'], ['delivery', 'Expected delivery date']];
+    var shown = S.pos.filter(function (po) { return L.matchesFilter(po, f, today); }).length;
+    return shell(poListTitle(p),
+      '<div class="toolbar"><div class="grow"><label for="po-search" style="position:absolute;left:-9999px">Search purchase orders</label>' +
+      '<input id="po-search" type="search" placeholder="Search customer, PO number, project or status" value="' + esc(S.poUI.q) + '" autocomplete="off"></div>' +
+      '<label for="po-sort" style="position:absolute;left:-9999px">Sort by</label><select id="po-sort">' +
+      sorts.map(function (s) { return '<option value="' + s[0] + '"' + (S.poUI.sort === s[0] ? ' selected' : '') + '>' + s[1] + '</option>'; }).join('') + '</select>' +
+      '<button type="button" class="btn" data-act="go" data-to="poForm">Add PO</button></div>' + chips +
+      '<div id="po-list" class="list">' + poListHtml(p) + '</div>',
+      { sub: plural(shown, 'purchase order') + (p.preset ? '' : ' in this view') + '.' });
+  };
+
+  /* ---------- PO details ---------- */
+  SCREENS.poDetail = function (p) {
+    var po = findPO(p.id);
+    if (!po) return shell('PO Details', notFound('purchase order'));
+    var out = L.outstanding(po), r = L.reminderOf(po, S.settings), od = L.isOverdue(po, L.todayLocal());
+    var hist = po.statusHistory.slice().reverse().map(function (h) {
+      return '<tr><td>' + esc(fmtDT(h.at)) + '</td><td>' + (h.from ? esc(h.from) : '—') + '</td><td>' + esc(h.to) + '</td></tr>';
+    }).join('');
+    var q = po.quotationId ? findQuote(po.quotationId) : null;
+    return shell('PO ' + po.poNumber,
+      '<div class="card"><dl class="detail-grid">' +
+      '<div><dt>Customer</dt><dd>' + esc(po.customer) + '</dd></div>' +
+      '<div><dt>PO number</dt><dd class="mono">' + esc(po.poNumber) + '</dd></div>' +
+      '<div><dt>Project title</dt><dd>' + (po.project ? esc(po.project) : '—') + '</dd></div>' +
+      '<div><dt>Linked quotation</dt><dd>' + (po.quotationId ? (q ? '<button type="button" class="btn btn-secondary btn-sm" data-act="go" data-to="quoteDetail" data-id="' + esc(q.id) + '">' + esc(q.number) + '</button>' : esc(po.quotationNumber || 'Quotation') + ' (deleted)') : '—') + '</dd></div>' +
+      '<div><dt>PO date</dt><dd>' + esc(fmtDay(po.poDate)) + '</dd></div>' +
+      '<div><dt>Expected delivery</dt><dd>' + esc(fmtDay(po.deliveryDate)) + (od ? ' <span class="tag bad">Overdue</span>' : '') + '</dd></div>' +
+      '<div><dt>Project value</dt><dd class="mono">' + esc(money(po.value, po.currency)) + '</dd></div>' +
+      '<div><dt>Currency</dt><dd>' + esc(po.currency) + '</dd></div>' +
+      '<div><dt>Current status</dt><dd><span class="badge ' + stCls(po.status) + '">' + esc(po.status) + '</span></dd></div>' +
+      '<div><dt>Payment status</dt><dd><span class="badge ' + payCls(po.paymentStatus) + '">' + esc(po.paymentStatus) + '</span></dd></div>' +
+      '<div><dt>Amount paid</dt><dd class="mono">' + esc(po.amountPaid === null ? '—' : money(po.amountPaid, po.currency)) + '</dd></div>' +
+      '<div><dt>Outstanding balance</dt><dd class="mono">' + esc(out === null ? '—' : money(out, po.currency)) + '</dd></div>' +
+      '<div><dt>Payment due date</dt><dd>' + esc(fmtDay(po.paymentDueDate)) + '</dd></div>' +
+      '<div><dt>Payment remarks</dt><dd>' + (po.paymentRemarks ? esc(po.paymentRemarks) : '—') + '</dd></div>' +
+      '<div class="wide"><dt>Remarks</dt><dd>' + (po.remarks ? esc(po.remarks).replace(/\n/g, '<br>') : '—') + '</dd></div>' +
+      '<div class="wide"><dt>Next reminder</dt><dd>' + (r ? esc((r.kind === 'payment' ? 'Payment follow-up' : 'Status check') + ' on ' + fmtDay(r.dueAt)) : 'None. This PO is completed and paid.') + '</dd></div>' +
+      '<div><dt>Created</dt><dd>' + esc(fmtDT(po.createdAt)) + '</dd></div>' +
+      '<div><dt>Last updated</dt><dd>' + esc(fmtDT(po.updatedAt)) + '</dd></div></dl></div>' +
+      '<div class="btn-row"><button type="button" class="btn" data-act="go" data-to="poStatus" data-id="' + esc(po.id) + '">Update Status</button>' +
+      '<button type="button" class="btn btn-secondary" data-act="go" data-to="poPayment" data-id="' + esc(po.id) + '">Update Payment</button>' +
+      '<button type="button" class="btn btn-secondary" data-act="go" data-to="poForm" data-id="' + esc(po.id) + '">Edit PO</button>' +
+      '<button type="button" class="btn btn-danger" data-act="deletePO" data-id="' + esc(po.id) + '">Delete PO</button>' +
+      '<button type="button" class="btn btn-secondary" data-act="backToPOList">Back to PO list</button></div>' +
+      '<section><h2 class="sec-title">Status history</h2>' +
+      (hist ? '<div class="table-wrap"><table class="plain-table"><thead><tr><th>When</th><th>From</th><th>To</th></tr></thead><tbody>' + hist + '</tbody></table></div>' : '<p class="muted">No status changes recorded.</p>') + '</section>');
+  };
+
+  /* ---------- update status ---------- */
+  function poSummary(po) {
+    return '<div class="card"><dl class="detail-grid">' +
+      '<div><dt>PO number</dt><dd class="mono">' + esc(po.poNumber) + '</dd></div>' +
+      '<div><dt>Customer</dt><dd>' + esc(po.customer) + '</dd></div>' +
+      '<div><dt>Project title</dt><dd>' + (po.project ? esc(po.project) : '—') + '</dd></div>' +
+      '<div><dt>Current status</dt><dd><span class="badge ' + stCls(po.status) + '">' + esc(po.status) + '</span></dd></div>' +
+      '<div><dt>Expected delivery</dt><dd>' + esc(fmtDay(po.deliveryDate)) + '</dd></div>' +
+      '<div><dt>Payment</dt><dd><span class="badge ' + payCls(po.paymentStatus) + '">' + esc(po.paymentStatus) + '</span></dd></div></dl></div>';
+  }
+  SCREENS.poStatus = function (p) {
+    var po = findPO(p.id);
+    if (!po) return shell('Update PO Status', notFound('purchase order'));
+    var stages = L.PO_STATUSES.map(function (s, i) {
+      return '<label class="stage"><input type="radio" name="newstatus" value="' + esc(s) + '"' + (s === po.status ? ' checked' : '') + '><span class="n">' + (i + 1) + '</span><span>' + esc(s) + '</span>' +
+        (s === po.status ? '<span class="cur">Current</span>' : '') + '</label>';
+    }).join('');
+    return shell('Update PO Status', poSummary(po) +
+      '<div class="fieldset"><h2>New status</h2><div class="stages" role="radiogroup" aria-label="PO status">' + stages + '</div>' +
+      '<p class="muted">Saving restarts the ' + S.settings.activeReminderDays + '-day status reminder. Marking a PO Completed while payment is not Paid sets a payment follow-up for ' + S.settings.paymentReminderDays + ' days later.</p></div>' +
+      '<div class="btn-row"><button type="button" class="btn grow-sm" data-act="saveStatus" data-id="' + esc(po.id) + '" data-save="1">Save Status</button>' +
+      '<button type="button" class="btn btn-secondary grow-sm" data-act="back">Cancel</button></div>');
+  };
+  async function saveStatus(id) {
+    if (S.busy) return;
+    var po = findPO(id), sel = $('input[name="newstatus"]:checked');
+    if (!po) { toast('This purchase order no longer exists.', 'err'); return; }
+    if (!sel || sel.value === po.status) { toast('Pick a different status first. It is already ' + po.status + '.'); return; }
+    setBusy(true);
+    try {
+      var rec = L.applyStatus(po, sel.value, new Date(), S.settings);
+      await Store.save('pos', rec);
+      upsert(S.pos, rec);
+      back();
+      var r = rec.reminder;
+      toast('PO ' + rec.poNumber + ' is now ' + rec.status + '.' + (r ? ' Next reminder: ' + fmtDay(r.dueAt) + '.' : ''));
+    } catch (e) { toast('Could not update the status: ' + errMsg(e), 'err'); }
+    finally { setBusy(false); }
+  }
+
+  /* ---------- update payment ---------- */
+  SCREENS.poPayment = function (p) {
+    var po = findPO(p.id);
+    if (!po) return shell('Update Payment', notFound('purchase order'));
+    var stages = L.PAY_STATUSES.map(function (s) {
+      return '<label class="stage"><input type="radio" name="paystatus" value="' + esc(s) + '"' + (s === po.paymentStatus ? ' checked' : '') + '><span>' + esc(s) + '</span>' +
+        (s === po.paymentStatus ? '<span class="cur">Current</span>' : '') + '</label>';
+    }).join('');
+    return shell('Update Payment', poSummary(po) +
+      '<div class="card"><dl class="detail-grid"><div><dt>Project value</dt><dd class="mono">' + esc(money(po.value, po.currency)) + '</dd></div>' +
+      '<div><dt>Outstanding now</dt><dd class="mono" id="pay-out">—</dd></div></dl></div>' +
+      '<div class="fieldset"><h2>Payment status</h2><div class="stages" role="radiogroup" aria-label="Payment status">' + stages + '</div>' +
+      '<div class="form-grid"><div class="field"><label for="pay-paid">Amount paid</label><input id="pay-paid" type="text" inputmode="decimal" placeholder="0" value="' + (po.amountPaid === null ? '' : esc(po.amountPaid)) + '"></div>' +
+      '<div class="field"><label for="pay-due">Payment due date</label><input id="pay-due" type="text" class="date-input" readonly placeholder="Tap to pick a date" value="' + esc(po.paymentDueDate) + '"></div>' +
+      '<div class="field wide"><label for="pay-remarks">Payment remarks</label><input id="pay-remarks" type="text" value="' + esc(po.paymentRemarks) + '"></div></div></div>' +
+      '<div class="btn-row"><button type="button" class="btn grow-sm" data-act="savePayment" data-id="' + esc(po.id) + '" data-save="1">Save Payment</button>' +
+      '<button type="button" class="btn btn-secondary grow-sm" data-act="back">Cancel</button></div>');
+  };
+  AFTER.poPayment = function (p) { updatePayOutstanding(findPO(p.id)); };
+  function updatePayOutstanding(po) {
+    var el = $('#pay-out');
+    if (!el || !po) return;
+    if (po.value === null) { el.textContent = '—'; return; }
+    var sel = $('input[name="paystatus"]:checked'), a = L.parseAmount($('#pay-paid').value, false);
+    var paid = sel && sel.value === 'Paid' ? po.value : (a.ok ? a.value : 0);
+    el.textContent = money(Math.max(0, (L.toCents(po.value) - L.toCents(paid)) / 100), po.currency);
+  }
+  async function savePayment(id) {
+    if (S.busy) return;
+    var po = findPO(id);
+    if (!po) { toast('This purchase order no longer exists.', 'err'); return; }
+    var sel = $('input[name="paystatus"]:checked');
+    var res = L.validatePayment({ paymentStatus: sel ? sel.value : po.paymentStatus, amountPaid: $('#pay-paid').value, paymentDueDate: $('#pay-due').value, paymentRemarks: $('#pay-remarks').value }, po);
+    if (!res.ok) {
+      clearErrors();
+      var map = { amountPaid: 'pay-paid', paymentDueDate: 'pay-due' };
+      Object.keys(res.errors).forEach(function (k) {
+        var el = $('#' + map[k]); if (!el) return;
+        el.setAttribute('aria-invalid', 'true');
+        var m = document.createElement('div'); m.className = 'field-err'; m.setAttribute('data-err', '1'); m.textContent = res.errors[k];
+        el.closest('.field').appendChild(m);
+        el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      });
+      toast('Check the highlighted fields.', 'err');
+      return;
+    }
+    setBusy(true);
+    try {
+      var rec = L.applyPayment(po, res.clean, new Date(), S.settings);
+      await Store.save('pos', rec);
+      upsert(S.pos, rec);
+      back();
+      toast('Payment updated for PO ' + rec.poNumber + ': ' + rec.paymentStatus + '.' + (rec.paymentStatus === 'Paid' ? ' Payment reminder cancelled.' : ''));
+    } catch (e) { toast('Could not update the payment: ' + errMsg(e), 'err'); }
+    finally { setBusy(false); }
+  }
+
+  /* ---------- reminders ---------- */
+  function reminderCard(po, now) {
+    var r = L.reminderOf(po, S.settings), due = new Date(r.dueAt).getTime() <= now.getTime(), out = L.outstanding(po);
+    var text;
+    if (r.kind === 'active') {
+      var days = Math.max(0, Math.floor((now.getTime() - new Date(po.statusUpdatedAt).getTime()) / 864e5));
+      text = 'Status has been “' + po.status + '” for ' + plural(days, 'day') + ' (since ' + fmtDay(po.statusUpdatedAt) + '). Record any progress.';
+    } else {
+      text = 'Completed on ' + fmtDay(po.statusUpdatedAt) + '. Payment is ' + po.paymentStatus.toLowerCase() + (out ? ' with ' + money(out, po.currency) + ' outstanding' : '') + '. Time to follow up.';
+    }
+    var id = esc(po.id), snoozeDays = r.kind === 'payment' ? S.settings.paymentReminderDays : S.settings.activeReminderDays;
+    return '<article class="item"><div class="item-top"><div><div class="item-title">' + esc(po.customer) + '</div><div class="item-sub"><span class="mono">PO ' + esc(po.poNumber) + '</span>' + (po.project ? ' · ' + esc(po.project) : '') + '</div></div>' +
+      '<span class="badge ' + (due ? 'b-warn' : '') + '">' + (r.kind === 'payment' ? 'Payment follow-up' : 'Status check') + '</span></div>' +
+      '<p>' + esc(text) + '</p><p class="muted">' + (due ? 'Due since ' : 'Due on ') + esc(fmtDay(r.dueAt)) + '</p>' +
+      '<div class="actions"><button type="button" class="btn btn-sm" data-act="reminderOpen" data-id="' + id + '">' + (r.kind === 'payment' ? 'Update payment' : 'Update status') + '</button>' +
+      '<button type="button" class="btn btn-secondary btn-sm" data-act="go" data-to="poDetail" data-id="' + id + '">Open PO</button>' +
+      '<button type="button" class="btn btn-secondary btn-sm" data-act="snooze" data-id="' + id + '">Remind me again in ' + plural(snoozeDays, 'day') + '</button></div></article>';
+  }
+  SCREENS.reminders = function () {
+    var now = new Date(), due = dueReminders();
+    var upcoming = S.pos.filter(function (p) { var r = L.reminderOf(p, S.settings); return r && new Date(r.dueAt).getTime() > now.getTime(); })
+      .sort(function (a, b) { return L.reminderOf(a, S.settings).dueAt < L.reminderOf(b, S.settings).dueAt ? -1 : 1; });
+    return shell('Reminders',
+      '<div class="note info">Reminders appear here and on the dashboard when you open the app. Windows notifications appear on the due date, even when this window is closed (the app keeps running in the system tray).</div>' +
+      '<section><h2 class="sec-title">Due now (' + due.length + ')</h2>' +
+      (due.length ? '<div class="list">' + due.map(function (p) { return reminderCard(p, now); }).join('') + '</div>' : '<div class="empty"><strong>Nothing is due</strong><p>Status and payment reminders show here when they fall due.</p></div>') + '</section>' +
+      '<section><h2 class="sec-title">Coming up (' + upcoming.length + ')</h2>' +
+      (upcoming.length ? '<div class="list">' + upcoming.slice(0, 20).map(function (p) { return reminderCard(p, now); }).join('') + '</div>' : '<p class="muted">No upcoming reminders.</p>') + '</section>');
+  };
+
+  /* ---------- settings ---------- */
+  SCREENS.settings = function () {
+    var size = new Blob([JSON.stringify({ q: S.quotes, p: S.pos })]).size;
+    var s = S.settings;
+    var where = Store.mode === 'cloud' ? 'Your account. Records stay available on other devices.'
+      : Store.persistent ? 'This computer only. Losing this computer or removing the app data erases them. A safety copy is saved automatically in Documents, Manufacturing Business Manager Backups, and you can also download a backup in Settings.'
+        : 'Nowhere. This view cannot keep data between visits. Download a backup before closing.';
+    return shell('Settings and Data Backup',
+      '<div class="fieldset"><h2>Currency and calculations</h2><div class="form-grid">' +
+      '<div class="field"><label for="set-currency">Currency for new records</label><select id="set-currency">' + currencyOptions(s.currency) + '</select>' +
+      '<span class="hint">Display only. Amounts are never converted, and saved records keep their own currency.</span></div>' +
+      '<div class="field"><span class="lbl">Cost amounts</span><label class="check"><input id="set-neg" type="checkbox"' + (s.allowNegative ? ' checked' : '') + '> Allow negative amounts in quotations</label>' +
+      '<span class="hint">Useful for discounts or credits. Off by default.</span></div></div></div>' +
+      '<div class="fieldset"><h2>Reminders</h2><div class="form-grid">' +
+      '<div class="field"><label for="set-active">Active PO status reminder (days)</label><input id="set-active" type="number" min="1" max="365" step="1" value="' + s.activeReminderDays + '"></div>' +
+      '<div class="field"><label for="set-pay">Completed PO payment reminder (days)</label><input id="set-pay" type="number" min="1" max="365" step="1" value="' + s.paymentReminderDays + '"></div></div>' +
+      '<p class="muted">Reminders arrive as Windows notifications on the due date (payment reminders at 9:00 AM), even when this window is closed, as long as the app is still running in the system tray. Anything overdue shows when you open the app and again at 9:00 AM each day until it is dealt with, and a daily 9:00 AM summary shows while projects or payments are open. Click a notification to open that purchase order.</p>' +
+      '<p id="notify-status" class="muted"></p>' +
+      '<div class="btn-row"><button type="button" class="btn btn-secondary" data-act="testNotify">Send a test notification</button></div></div>' +
+      '<div class="fieldset"><h2>PIN lock</h2><p class="muted">' + (hasPin()
+        ? 'A PIN is needed to open All Purchase Orders, Saved Quotations and the employee and salary screens.'
+        : 'Set a numeric PIN (4 to 6 digits) to protect All Purchase Orders and Saved Quotations.') + ' If you forget the PIN you will need to clear the app data, which erases your records, so keep a backup.</p>' +
+      '<div class="btn-row">' + (hasPin()
+        ? '<button type="button" class="btn btn-secondary" data-act="changePin">Change PIN</button><button type="button" class="btn btn-danger" data-act="removePin">Remove PIN</button>'
+        : '<button type="button" class="btn" data-act="setPin">Set PIN</button>') + '</div></div>' +
+      '<div id="sync-panel"></div>' +
+      '<div class="fieldset"><h2>Backup and export</h2>' +
+      '<p class="muted">Download a PDF backup after any busy day. It holds two lists only: every <b>saved quotation</b> and every <b>purchase order</b>, with their totals.</p>' +
+      '<div class="btn-row"><button type="button" class="btn" data-act="pdfBackup">Download backup (PDF)</button></div>' +
+      '<p class="muted">A PDF is for reading and printing. To move records back into the app you need the restore file below.</p>' +
+      '<div class="btn-row"><button type="button" class="btn btn-secondary" data-act="backup">Download restore file (JSON)</button>' +
+      '<button type="button" class="btn btn-secondary" data-act="exportQuotes">Export quotations (CSV)</button>' +
+      '<button type="button" class="btn btn-secondary" data-act="exportPOs">Export purchase orders (CSV)</button></div>' +
+      '<div class="field"><label for="restore-file">Restore from a backup file</label><input id="restore-file" type="file" accept=".json,application/json">' +
+      '<span class="hint">You will see a summary and confirm before anything changes. Records with the same ID are replaced, other records are kept, and your current settings stay.</span></div></div>' +
+      '<div class="fieldset"><h2>About this app</h2><dl class="detail-grid">' +
+      '<div><dt>Version</dt><dd class="mono">' + APP_VERSION + '</dd></div>' +
+      '<div><dt>Quotations saved</dt><dd>' + S.quotes.length + '</dd></div>' +
+      '<div><dt>Purchase orders saved</dt><dd>' + S.pos.length + '</dd></div>' +
+      '<div><dt>Data size</dt><dd>' + (size / 1024).toFixed(1) + ' KB</dd></div>' +
+      '<div class="wide"><dt>Where your records are kept</dt><dd>' + esc(where) + '</dd></div></dl></div>');
+  };
+
+  /* ================= files: backup, export, restore ================= */
+  async function saveBinary(filename, bytes) {
+    var b64 = window.MBM_PDF.toBase64(bytes);
+    if (window.NativeFileBridge && typeof window.NativeFileBridge.saveBase64 === 'function') {
+      try { var sr = await window.NativeFileBridge.saveBase64(filename, b64, 'application/pdf'); toast(sr && sr.canceled ? 'Save cancelled.' : 'Saved ' + (sr && sr.path ? 'to ' + sr.path : filename) + '.'); return; }
+      catch (nativeError) { console.warn('Native PDF export unavailable; downloading instead.', nativeError); }
+    }
+    var url = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
+    var a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click();
+    setTimeout(function () { a.remove(); URL.revokeObjectURL(url); }, 4000);
+    toast('Saved ' + filename + '.');
+  }
+  function amountsLine(label, by) {
+    var parts = Object.keys(by).map(function (cur) { return money(by[cur], cur); });
+    return parts.length ? label + ': ' + parts.join('  ·  ') : null;
+  }
+  async function makeListsPdf() {
+    if (!window.MBM_PDF) { toast('PDF export is not ready yet. Try again in a moment.', 'err'); return; }
+    if (hasPin() && !S.unlocked && !(await verifyPin('PIN to create the PDF'))) return;
+    var qs = L.sortQuotes(S.quotes), ps = L.sortPOs(S.pos, 'poDate');
+    var quoteSec = {
+      title: 'Saved Quotations', count: plural(qs.length, 'quotation'),
+      cols: [{ h: '#', w: 0.04 }, { h: 'Quotation no.', w: 0.12 }, { h: 'Date', w: 0.10 }, { h: 'Customer', w: 0.20 }, { h: 'Project', w: 0.24 },
+             { h: 'Total cost', w: 0.15, align: 'right' }, { h: 'Quoted amount', w: 0.15, align: 'right' }],
+      rows: qs.map(function (q, i) { return [String(i + 1), q.number, fmtDay(q.date), q.customer, q.project, money(L.totalCost(q.costs), q.currency), q.quotedAmount === null || q.quotedAmount === undefined ? '—' : money(q.quotedAmount, q.currency)]; }),
+      summary: [amountsLine('Total quoted', L.sumByCurrency(qs, function (x) { return x.quotedAmount; }))].filter(Boolean)
+    };
+    var poSec = {
+      title: 'Purchase Orders', count: plural(ps.length, 'purchase order'),
+      cols: [{ h: '#', w: 0.035 }, { h: 'PO no.', w: 0.09 }, { h: 'PO date', w: 0.08 }, { h: 'Customer', w: 0.135 }, { h: 'Project', w: 0.145 }, { h: 'Delivery', w: 0.08 },
+             { h: 'Status', w: 0.10 }, { h: 'Payment', w: 0.085 }, { h: 'PO value', w: 0.085, align: 'right' }, { h: 'Outstanding', w: 0.085, align: 'right' }, { h: 'Pay due', w: 0.08 }],
+      rows: ps.map(function (p, i) { return [String(i + 1), p.poNumber, fmtDay(p.poDate), p.customer, p.project, fmtDay(p.deliveryDate), p.status, p.paymentStatus, money(p.value, p.currency), money(L.outstanding(p), p.currency), fmtDay(p.paymentDueDate)]; }),
+      summary: [amountsLine('Total PO value', L.sumByCurrency(ps, function (x) { return x.value; })),
+                amountsLine('Total outstanding', L.sumByCurrency(ps.filter(function (x) { return x.paymentStatus !== 'Paid'; }), function (x) { return L.outstanding(x); }))].filter(Boolean)
+    };
+    toast('Making your PDF…');
+    try {
+      var bytes = await window.MBM_PDF.build({ sections: [quoteSec, poSec], subtitle: 'Backup of saved quotations and purchase orders · created ' + fmtDT(new Date().toISOString()) });
+      await saveBinary('saved-lists-' + stamp() + '.pdf', bytes);
+    } catch (e) { toast('Could not make the PDF: ' + errMsg(e), 'err'); }
+  }
+
+  async function saveFile(filename, text) {
+    if (window.NativeFileBridge && typeof window.NativeFileBridge.saveFile === 'function') {
+      try { var sf = await window.NativeFileBridge.saveFile(filename, text); toast(sf && sf.canceled ? 'Save cancelled.' : 'Saved ' + (sf && sf.path ? 'to ' + sf.path : filename) + '.'); return; }
+      catch (nativeError) { console.warn('Native file export unavailable; showing copy fallback.', nativeError); }
+    }
+    var d = null;
+    if (d) {
+      try { await d.save({ filename: filename, data: text }); toast('Saved ' + filename + '.'); return; }
+      catch (e) {
+        if (e && e.code === 'declined') { toast('Download cancelled.'); return; }
+        if (e && e.code === 'rate_limited') { toast('Wait a moment and try again.', 'err'); return; }
+      }
+    }
+    await dialog({
+      title: 'Copy ' + filename,
+      html: '<p>Downloads are not available in this view. Copy the text below into a file named <b>' + esc(filename) + '</b>.</p><textarea id="copy-box" readonly>' + esc(text) + '</textarea>',
+      actions: [
+        { label: 'Close', value: true, cls: 'btn-secondary' },
+        {
+          label: 'Copy text', keep: true, onClick: function (root) {
+            var ta = $('#copy-box', root); ta.focus(); ta.select();
+            var p = navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(text) : Promise.reject();
+            p.then(function () { toast('Copied.'); }, function () { try { document.execCommand('copy'); toast('Copied.'); } catch (e) { toast('Press and hold to copy the selected text.'); } });
+          }
+        }
+      ]
+    });
+  }
+  function stamp() { return L.todayLocal(); }
+  async function handleRestoreFile(file) {
+    if (!file) return;
+    var text, obj;
+    try { text = await file.text(); obj = JSON.parse(text); } catch (e) { toast('That file could not be read as a backup.', 'err'); return; }
+    var v = L.validateBackup(obj);
+    if (!v.ok) { toast(v.error, 'err'); return; }
+    var overwrite = v.quotations.filter(function (q) { return findQuote(q.id); }).length + v.pos.filter(function (p) { return findPO(p.id); }).length;
+    var ok = await confirmDialog('Restore this backup?',
+      '<p>The file holds <b>' + plural(v.quotations.length, 'quotation') + '</b> and <b>' + plural(v.pos.length, 'purchase order') + '</b>' + (v.skipped ? ' (' + v.skipped + ' damaged entries will be skipped)' : '') + '.</p>' +
+      '<p>' + (overwrite ? '<b>' + plural(overwrite, 'record') + '</b> already here will be replaced by the backup version. ' : 'Nothing here will be replaced. ') + 'Other records stay, and your settings stay.</p>', 'Restore', false);
+    if (!ok) { toast('Restore cancelled. Nothing was changed.'); return; }
+    S.busy = true;
+    try {
+      var restoredAt = new Date().toISOString(); // restored records count as fresh edits so phone sync keeps them
+      for (var i = 0; i < v.quotations.length; i++) { v.quotations[i].updatedAt = restoredAt; await Store.save('quotations', v.quotations[i]); upsert(S.quotes, v.quotations[i]); }
+      for (var j = 0; j < v.pos.length; j++) { v.pos[j].updatedAt = restoredAt; await Store.save('pos', v.pos[j]); upsert(S.pos, v.pos[j]); }
+      S.settings.quoteCounter = Math.max(S.settings.quoteCounter, v.settings.quoteCounter, L.nextQuoteSeq(S.quotes, 0) - 1);
+      await Store.saveSettings(S.settings);
+      var officeNote = (window.MBM_OFFICE && obj.officeTools) ? window.MBM_OFFICE.restore(obj.officeTools) : '';
+      toast('Restored ' + plural(v.quotations.length, 'quotation') + ' and ' + plural(v.pos.length, 'purchase order') + '.' + officeNote);
+    } catch (e) { toast('Restore stopped part way: ' + errMsg(e), 'err'); }
+    finally { S.busy = false; render(); }
+  }
+
+  /* ================= deleting ================= */
+  async function deleteQuote(id) {
+    var q = findQuote(id); if (!q) return;
+    var linked = S.pos.filter(function (p) { return p.quotationId === id; }).length;
+    var ok = await confirmDialog('Delete ' + q.number + '?',
+      '<p><b>' + esc(q.customer) + '</b> · ' + esc(q.project) + '</p><p>This cannot be undone. The quotation number will not be used again.' +
+      (linked ? ' ' + plural(linked, 'linked purchase order') + ' will be kept.' : '') + '</p>', 'Delete quotation', true);
+    if (!ok) return;
+    try {
+      await Store.remove('quotations', id);
+      S.quotes = S.quotes.filter(function (x) { return x.id !== id; });
+      if (S.view.name === 'quoteDetail') back(); else render();
+      toast(q.number + ' deleted.');
+    } catch (e) { toast('Could not delete: ' + errMsg(e), 'err'); }
+  }
+  async function deletePO(id) {
+    var po = findPO(id); if (!po) return;
+    var ok = await confirmDialog('Delete PO ' + po.poNumber + '?',
+      '<p><b>' + esc(po.customer) + '</b>' + (po.project ? ' · ' + esc(po.project) : '') + '</p><p>This cannot be undone. Any linked quotation is not affected.</p>', 'Delete PO', true);
+    if (!ok) return;
+    try {
+      await Store.remove('pos', id);
+      S.pos = S.pos.filter(function (x) { return x.id !== id; });
+      if (S.view.name === 'poDetail') back(); else render();
+      toast('PO ' + po.poNumber + ' deleted.');
+    } catch (e) { toast('Could not delete: ' + errMsg(e), 'err'); }
+  }
+
+  /* ================= actions ================= */
+  AFTER.settings = function () {
+    var el = $('#notify-status'); if (!el) return;
+    if (!window.NativeNotify) { el.textContent = 'Notifications work only in the installed Windows app.'; return; }
+    window.NativeNotify.status().then(function (st) {
+      el.innerHTML = st === 'granted' ? '<b class="pos">Notifications are on.</b> Use the button below to check one now.'
+        : '<b class="neg">Notifications are off.</b> Click the button below. If nothing appears, open Windows Settings, System, Notifications, make sure notifications are on for this app and Focus assist (Do not disturb) is off.';
+    });
+  };
+
+  var ACTIONS = {
+    setPin: async function () {
+      var a = await askNewPin('Set PIN'); if (a === null) return;
+      await pinSave(a); toast('PIN saved. It is now needed to open All Purchase Orders, Saved Quotations and the employee and salary screens.'); render();
+    },
+    changePin: async function () {
+      if (!(await verifyPin('Current PIN'))) return;
+      var a = await askNewPin('New PIN'); if (a === null) return;
+      await pinSave(a); toast('PIN changed.'); render();
+    },
+    removePin: async function () {
+      if (!(await verifyPin('Enter PIN to remove it'))) return;
+      localStorage.removeItem(PIN_KEY); S.unlocked = false; toast('PIN removed.'); render();
+    },
+    toggleTheme: function () {
+      var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('mbm:theme', next); } catch (e) { /* ignore */ }
+      var m = document.querySelector('meta[name="theme-color"]'); if (m) m.setAttribute('content', next === 'light' ? '#f5f2ed' : '#07070a');
+    },
+    testNotify: function () {
+      if (!window.NativeNotify) { toast('Notifications work only in the installed Windows app.', 'err'); return; }
+      window.NativeNotify.test().then(function (ok) {
+        toast(ok ? 'Test notification sent. It should pop up at the bottom right of the screen.' : 'Notifications are blocked. Open Windows Settings, System, Notifications, and switch them on for Manufacturing Business Manager (also turn off Focus assist).', ok ? null : 'err');
+        AFTER.settings();
+      });
+    },
+    home: function () { go('dashboard'); },
+    back: function () { back(); },
+    go: function (el) { go(el.dataset.to, el.dataset.id ? { id: el.dataset.id } : {}); },
+    openPOList: function (el) { S.poUI.q = ''; S.poUI.filter = 'all'; go('poList', el.dataset.preset ? { preset: el.dataset.preset } : {}); },
+    backToPOList: function () { var prev = S.stack[S.stack.length - 1]; if (prev && prev.name === 'poList') back(); else ACTIONS.openPOList({ dataset: { preset: '' } }); },
+    setFilter: function (el) { S.poUI.filter = el.dataset.filter; render(); },
+    clearPOSearch: function () { S.poUI.q = ''; render(); },
+    clearQuoteSearch: function () { S.quoteUI.q = ''; render(); },
+    newQuote: function () { go('quoteForm', {}, { replace: S.view.name === 'quoteForm' }); window.scrollTo(0, 0); },
+    newPO: function () { go('poForm', {}, { replace: true }); },
+    saveQuote: saveQuote,
+    clearQuote: clearQuoteForm,
+    deleteQuote: function (el) { deleteQuote(el.dataset.id); },
+    poFromQuote: function (el) { go('poForm', { quoteId: el.dataset.id }); },
+    savePO: savePO,
+    clearPO: clearPOForm,
+    deletePO: function (el) { deletePO(el.dataset.id); },
+    saveStatus: function (el) { saveStatus(el.dataset.id); },
+    savePayment: function (el) { savePayment(el.dataset.id); },
+    reminderOpen: function (el) {
+      var po = findPO(el.dataset.id); if (!po) return;
+      var r = L.reminderOf(po, S.settings);
+      go(r && r.kind === 'payment' ? 'poPayment' : 'poStatus', { id: po.id });
+    },
+    snooze: async function (el) {
+      var po = findPO(el.dataset.id); if (!po || S.busy) return;
+      var r = L.snoozeReminder(po, new Date(), S.settings); if (!r) return;
+      try {
+        var rec = Object.assign({}, po, { reminder: r });
+        await Store.save('pos', rec); upsert(S.pos, rec);
+        render();
+        toast('Reminder moved to ' + fmtDay(r.dueAt) + '.');
+      } catch (e) { toast('Could not change the reminder: ' + errMsg(e), 'err'); }
+    },
+    backup: function () {
+      saveFile('manufacturing-backup-' + stamp() + '.json', JSON.stringify(L.makeBackup(S.quotes, S.pos, S.settings, new Date()), null, 2));
+    },
+    pdfBackup: function () { makeListsPdf(); },
+    exportQuotes: function () { saveFile('quotations-' + stamp() + '.csv', L.quotesCSV(S.quotes)); },
+    exportPOs: function () { saveFile('purchase-orders-' + stamp() + '.csv', L.posCSV(S.pos)); },
+    retryLoad: async function () {
+      try { await reload(); S.loadError = ''; } catch (e) { S.loadError = errMsg(e); }
+      render();
+    }
+  };
+
+  app.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-act]');
+    if (!el || el.disabled) return;
+    var h = ACTIONS[el.dataset.act];
+    if (h) { e.preventDefault(); h(el, e); }
+  });
+  app.addEventListener('submit', function (e) { e.preventDefault(); });
+  app.addEventListener('input', function (e) {
+    var t = e.target;
+    if (t.classList.contains('cost-input') || t.id === 'q-quoted') updateQuoteTotals();
+    else if (t.id === 'po-value' || t.id === 'po-paid') updatePOOutstanding();
+    else if (t.id === 'pay-paid') updatePayOutstanding(findPO(S.view.p.id));
+    else if (t.id === 'quote-search') { S.quoteUI.q = t.value; $('#quote-list').innerHTML = quoteListHtml(); }
+    else if (t.id === 'po-search') { S.poUI.q = t.value; $('#po-list').innerHTML = poListHtml(S.view.p); }
+  });
+  app.addEventListener('change', async function (e) {
+    var t = e.target;
+    if (t.id === 'q-currency') updateQuoteTotals();
+    else if (t.id === 'po-currency') updatePOOutstanding();
+    else if (t.id === 'po-paystatus') {
+      if (t.value === 'Paid') { var v = L.parseAmount($('#po-value').value, false); if (v.ok && !v.blank) $('#po-paid').value = String(L.roundMoney(v.value)); }
+      updatePOOutstanding();
+    } else if (t.id === 'po-quote') {
+      var q = findQuote(t.value);
+      if (q && S.view.name === 'poForm' && !S.view.p.id) {
+        if (!$('#po-customer').value.trim()) $('#po-customer').value = q.customer;
+        if (!$('#po-project').value.trim()) $('#po-project').value = q.project;
+        if (!$('#po-value').value.trim() && q.quotedAmount !== null) $('#po-value').value = String(q.quotedAmount);
+        $('#po-currency').value = q.currency;
+        updatePOOutstanding();
+      }
+    } else if (t.name === 'paystatus') {
+      var po = findPO(S.view.p.id);
+      if (po && t.value === 'Paid' && po.value !== null) $('#pay-paid').value = String(po.value);
+      updatePayOutstanding(po);
+    } else if (t.id === 'po-sort') { S.poUI.sort = t.value; $('#po-list').innerHTML = poListHtml(S.view.p); }
+    else if (t.id === 'restore-file') { var f = t.files && t.files[0]; t.value = ''; handleRestoreFile(f); }
+    else if (t.id === 'set-currency' || t.id === 'set-neg' || t.id === 'set-active' || t.id === 'set-pay') {
+      var next = Object.assign({}, S.settings);
+      if (t.id === 'set-currency') next.currency = t.value;
+      if (t.id === 'set-neg') next.allowNegative = t.checked;
+      if (t.id === 'set-active' || t.id === 'set-pay') {
+        var n = parseInt(t.value, 10);
+        if (!(n >= 1 && n <= 365)) { toast('Enter a whole number of days from 1 to 365.', 'err'); t.value = t.id === 'set-active' ? S.settings.activeReminderDays : S.settings.paymentReminderDays; return; }
+        if (t.id === 'set-active') next.activeReminderDays = n; else next.paymentReminderDays = n;
+      }
+      try { await Store.saveSettings(next); S.settings = next; toast('Settings saved.'); }
+      catch (err) { toast('Could not save settings: ' + errMsg(err), 'err'); }
+    }
+  });
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden || Store.mode !== 'cloud' || S.busy) return;
+    var n = S.view.name;
+    if (['dashboard', 'quoteList', 'quoteDetail', 'poList', 'poDetail', 'reminders'].indexOf(n) < 0) return;
+    if ($('#modal-root').firstChild) return;
+    reload().then(function () { var y = window.scrollY; render(); window.scrollTo(0, y); }, function () { /* keep what is on screen */ });
+  });
+
+  /* ================= start ================= */
+  async function boot() {
+    try { await Store.init(); await reload(); }
+    catch (e) { S.loadError = errMsg(e); }
+    S.view = { name: 'dashboard', p: {} }; S.stack = [];
+    try { history.pushState({ mbm: 0 }, ''); } catch (e) { /* ignore */ }  // spare entry so Back can close a dialog on the dashboard
+    render();
+    notifyNativeDataChanged();
+  }
+  window.MBM_APP = { S: S, Store: Store, go: go, back: back, render: render, toast: toast, SCREENS: SCREENS, AFTER: AFTER, ACTIONS: ACTIONS, TITLES: TITLES,
+    shell: shell, esc: esc, dialog: dialog, confirmDialog: confirmDialog, fmtDay: fmtDay, plural: plural, saveFile: saveFile, saveBinary: saveBinary, notFound: notFound, customerNames: customerNames, stats: stats, dueReminders: dueReminders, money: money };
+  boot();
+})();
+
+</script>
+
+<script type="module" src="./desktop-reminders.js"></script>
+<script type="module" src="./desktop-backup.js"></script>
+<script type="module" src="./office-tools.js"></script>
+<script type="module" src="./yearly-report.js"></script>
+<script type="module" src="./gst-filing.js"></script>
+<script type="module" src="./desktop-ui.js"></script>
+<script type="module" src="./lan-sync.js"></script>
+<script type="module" src="./pdf-lists.js"></script>
+</body></html>

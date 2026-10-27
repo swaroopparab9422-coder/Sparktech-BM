@@ -1,0 +1,70 @@
+/* Windows look: same orange and black colours, cleaner layout. Loaded after the main styles. */
+:root { --r-card: 16px; --r-ctl: 10px; --shadow-card: 0 1px 2px rgba(0,0,0,.06), 0 8px 24px -12px rgba(0,0,0,.22); --side-w: 260px; }
+html[data-theme="dark"] { --shadow-card: 0 1px 0 rgba(255,255,255,.03) inset, 0 10px 28px -14px rgba(0,0,0,.9); }
+
+.ic { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- general polish ---------- */
+.wrap { max-width: 1200px; }
+.page-title { font-size: 38px; letter-spacing: .01em; }
+.page-title::after { content: ''; display: block; width: 56px; height: 4px; border-radius: 4px; background: var(--primary); margin-top: 10px; }
+.sec-title { letter-spacing: .04em; }
+.btn { border-radius: var(--r-ctl); min-height: 46px; transition: background .12s, border-color .12s, transform .06s, box-shadow .12s; }
+.btn:active { transform: translateY(1px); }
+.btn:not(.btn-secondary):not(.btn-ghost):not(.btn-danger) { box-shadow: 0 6px 16px -10px var(--primary); }
+.btn-sm { min-height: 38px; border-radius: 9px; }
+input, select, textarea { border-radius: var(--r-ctl) !important; min-height: 46px; transition: border-color .12s, box-shadow .12s; }
+input:focus, select:focus, textarea:focus { border-color: var(--primary) !important; box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 28%, transparent); outline: none; }
+.fieldset { border-radius: var(--r-card) !important; box-shadow: var(--shadow-card); padding: 20px 22px; }
+.fieldset > h2:first-child { display: flex; align-items: center; gap: 10px; font-size: 22px; }
+.fieldset > h2:first-child::before { content: ''; width: 4px; height: 20px; border-radius: 3px; background: var(--primary); }
+.item { border-radius: var(--r-card) !important; box-shadow: var(--shadow-card); transition: transform .12s, box-shadow .12s; }
+.item:hover { transform: translateY(-1px); }
+.note, .alert, .empty { border-radius: 14px !important; }
+.toolbar input[type="search"] { min-height: 48px; }
+.o-row, .o-scroll { border-radius: 14px; box-shadow: var(--shadow-card); }
+.o-row { padding: 14px 18px; }
+.o-3 button { border-radius: 12px; min-width: 124px; min-height: 56px; transition: background .1s, border-color .1s, transform .06s; }
+.o-3 button:active { transform: scale(.97); }
+.o-pill { box-shadow: var(--shadow-card); }
+.cost-scroll { border-radius: 12px; }
+/* Save buttons stay in view on long forms */
+form > .btn-row:last-child { position: sticky; bottom: 34px; z-index: 6; padding: 12px 0 14px; margin-top: 8px; background: linear-gradient(180deg, transparent, var(--bg) 34%); }
+.mode-banner { border-radius: 14px !important; }
+
+/* ---------- dashboard ---------- */
+.dash { display: flex; flex-direction: column; gap: 26px; padding-top: 22px; }
+.dash-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.dash section { display: flex; flex-direction: column; gap: 14px; }
+.dash .sec-title { margin: 0; }
+.act-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.act-card { display: flex; align-items: center; gap: 14px; text-align: left; padding: 18px; border: 1px solid var(--line-strong); border-radius: var(--r-card); background: var(--surface); color: var(--ink); cursor: pointer; box-shadow: var(--shadow-card); transition: transform .12s, border-color .12s, box-shadow .12s; font: inherit; }
+.act-card:hover { transform: translateY(-2px); border-color: var(--primary); }
+.act-ic { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: var(--surface-2); color: var(--primary); flex: none; }
+.act-ic .ic { width: 26px; height: 26px; }
+.act-tx { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.act-tx strong { font-family: var(--f-display); font-weight: 700; font-size: 20px; line-height: 1.1; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.act-tx span { color: var(--muted); font-size: 14px; }
+.act-primary { background: var(--primary); border-color: var(--primary); color: var(--on-primary); box-shadow: 0 14px 28px -16px var(--primary); }
+.act-primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
+.act-primary .act-ic { background: rgba(0,0,0,.14); color: var(--on-primary); }
+.act-primary .act-tx span { color: inherit; opacity: .85; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+.kpi { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; padding: 18px 18px 16px; border: 1px solid var(--line); border-radius: var(--r-card); background: var(--surface); color: var(--ink); cursor: pointer; box-shadow: var(--shadow-card); transition: transform .12s, border-color .12s; font: inherit; }
+.kpi:hover { transform: translateY(-2px); border-color: var(--primary); }
+.kpi-ic { position: absolute; right: 14px; top: 14px; color: var(--primary); opacity: .9; }
+.kpi-ic .ic { width: 26px; height: 26px; }
+.kpi-v { font-family: var(--f-display); font-weight: 700; font-size: 48px; line-height: 1; color: var(--primary); }
+.kpi-k { color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-top: 4px; }
+.val-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.val-card { position: relative; display: flex; flex-direction: column; gap: 4px; padding: 18px; border: 1px solid var(--line); border-radius: var(--r-card); background: var(--surface); box-shadow: var(--shadow-card); }
+.val-card .k { color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.val-card .v { font-family: var(--f-display); font-weight: 700; font-size: 40px; line-height: 1.05; color: var(--ink); }
+.val-card .s { color: var(--muted); font-size: 13px; }
+.val-card .v-money { font-family: var(--f-mono); font-weight: 700; font-size: 28px; color: var(--ink); letter-spacing: .02em; }
+.val-ic { position: absolute; right: 14px; top: 14px; color: var(--primary); }
+.val-ic .ic { width: 24px; height: 24px; }
+.dash .alert { box-shadow: var(--shadow-card); }
+
+/* ---------- smaller windows keep the old single column ---------- */
+@media (max-width: 999px) { .act-card, .kpi, .val-card { box-shadow: none; } }

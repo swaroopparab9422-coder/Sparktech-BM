@@ -1,0 +1,43 @@
+{
+  "name": "manufacturing-business-manager-windows",
+  "version": "1.4.0",
+  "private": true,
+  "description": "Manufacturing Business Manager for Windows 10/11 (offline quotations and purchase orders)",
+  "author": "Spark Tech Automation",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node test/run-tests.js",
+    "dist": "electron-builder --win --x64 --publish never"
+  },
+  "devDependencies": {
+    "electron": "^39.0.0",
+    "electron-builder": "^26.0.0"
+  },
+  "build": {
+    "appId": "com.sparktechautomation.manufacturingbusinessmanager",
+    "productName": "Manufacturing Business Manager",
+    "copyright": "Spark Tech Automation",
+    "directories": { "output": "dist", "buildResources": "build" },
+    "files": ["main.js", "preload.js", "lansync.js", "reminders.js", "app/**/*", "assets/**/*"],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        { "target": "nsis", "arch": ["x64"] },
+        { "target": "portable", "arch": ["x64"] }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Manufacturing Business Manager",
+      "deleteAppDataOnUninstall": false,
+      "include": "build/installer.nsh",
+      "artifactName": "MBM-Windows-Setup-${version}.${ext}"
+    },
+    "portable": { "artifactName": "MBM-Windows-Portable-${version}.${ext}" }
+  }
+}
